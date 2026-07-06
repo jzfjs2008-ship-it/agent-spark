@@ -15,7 +15,7 @@ from agent_spark.filter.five_layer_filter import five_layer_filter
 def main():
     """Run a self-contained demo of the 5-layer filter engine."""
     print("=" * 60)
-    print("  ✨ Inspiration · 灵感 — Demo")
+    print("  ✨ Agent Spark — Demo")
     print("  Industrial-Grade Creative Idea Pipeline")
     print("=" * 60)
     print()

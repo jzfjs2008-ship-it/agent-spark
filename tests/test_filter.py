@@ -15,7 +15,7 @@ from agent_spark.filter.five_layer_filter import (
 def test_layer1():
     """Test L1: Fact Validation"""
     print("═" * 50)
-    print("L1: Fact Validation / 事实校验")
+    print("L1: Fact Validation")
     print("═" * 50)
     
     # 1) Real idea: pain matches user input
@@ -69,7 +69,7 @@ def test_layer1():
 def test_layer2():
     """Test L2: Logic Validation / 逻辑校验"""
     print("\n" + "═" * 50)
-    print("L2: Logic Validation / 逻辑校验")
+    print("L2: Logic Validation")
     print("═" * 50)
     
     # 1) Good logic
@@ -126,7 +126,7 @@ def test_layer2():
 def test_layer3():
     """Test L3: Feasibility / 落地性"""
     print("\n" + "═" * 50)
-    print("L3: Feasibility / 落地性")
+    print("L3: Feasibility")
     print("═" * 50)
     
     # 1) Hardware mention alone shouldn't fail (v2 fix)
@@ -170,7 +170,7 @@ def test_layer3():
 def test_layer4():
     """Test L4: Market Duplicate / 市场重复"""
     print("\n" + "═" * 50)
-    print("L4: Market Duplicate / 市场重复")
+    print("L4: Market Duplicate")
     print("═" * 50)
     
     # 1) Generic "AI" mention shouldn't match too many products (v2 fix)
@@ -202,7 +202,7 @@ def test_layer4():
 def test_layer5():
     """Test L5: Value / 价值"""
     print("\n" + "═" * 50)
-    print("L5: Value / 价值")
+    print("L5: Value")
     print("═" * 50)
     
     # 1) Buzzword overload
@@ -253,7 +253,7 @@ def test_layer5():
 def test_end_to_end():
     """End-to-end filter test"""
     print("\n" + "═" * 50)
-    print("End-to-End / 端到端测试")
+    print("End-to-End Test")
     print("═" * 50)
     
     ideas = [
@@ -334,7 +334,7 @@ def test_end_to_end():
                      if not any(r["index"] == i for r in results)]
     
     print(f"\n  ✅ Passed / 通过: {passed_titles}")
-    print(f"  ❌ Failed / 淘汰: {failed_titles}")
+    print(f"  ❌ Failed: {failed_titles}")
     
     # Expectations
     assert "模块化伸缩收纳架" in passed_titles, "Good idea should pass"

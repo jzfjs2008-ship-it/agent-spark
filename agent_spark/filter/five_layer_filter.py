@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Inspiration · Five-Layer Industrial Convergence Filter
-灵感 · 五层工业级收敛过滤系统
+Five-Layer Industrial Convergence Filter
 =========================================================
 Core quality-control engine — hybrid rule-based + AI-assisted validation.
-核心质检引擎 — 规则判断为主 + AI辅助验证
+Core quality-control engine — rule-based + AI-assisted validation.
 
 Key fixes vs v1.0:
   [FIX] L1: replaced pure word-count check with actual fact validation
@@ -27,7 +27,7 @@ Idea = dict[str, Any]
 
 # ─────────────────────────────────────────────────────────
 # CONFIGURATION LOADING
-# 配置加载 — 优先从外部 JSON 加载，回退到硬编码
+# Config — load from JSON, fall back to hardcoded
 # ─────────────────────────────────────────────────────────
 
 import os
@@ -50,7 +50,7 @@ _CONFIG = _load_config()
 
 # ─────────────────────────────────────────────────────────
 # MATURE PRODUCT DATABASE (extensible, token-scored)
-# 成熟产品数据库（可扩展，token级别加权评分）
+# Mature product DB (extensible, token-weighted scoring)
 # ─────────────────────────────────────────────────────────
 # Each entry has weighted keywords: (term, weight).
 # Higher weight = more distinctive for that product.
@@ -99,7 +99,7 @@ TRIVIAL_PATTERNS: list[re.Pattern] = [
 
 # ─────────────────────────────────────────────────────────
 # LAYER 1: Fact Validation (fixed: real evidence, not char count)
-# 第一层：事实校验（修复：真正的证据检查，不是字数检查）
+# LAYER 1: Fact Validation (real evidence, not word-count)
 # ─────────────────────────────────────────────────────────
 
 def layer1_fact_check(
@@ -183,7 +183,7 @@ def layer1_fact_check(
 
 # ─────────────────────────────────────────────────────────
 # LAYER 2: Logic Validation (fixed: removed len<20 trap)
-# 第二层：逻辑校验（修复：移除 len<20 误杀陷阱）
+# LAYER 2: Logic Validation (no len<20 trap)
 # ─────────────────────────────────────────────────────────
 
 def layer2_logic_check(idea: Idea) -> tuple[bool, str]:
@@ -238,7 +238,7 @@ def layer2_logic_check(idea: Idea) -> tuple[bool, str]:
 
 # ─────────────────────────────────────────────────────────
 # LAYER 3: Feasibility Validation (fixed: weighted scoring)
-# 第三层：落地性校验（修复：加权评分，不自动淘汰硬件词）
+# LAYER 3: Feasibility (weighted scoring, no hard-keyword kill)
 # ─────────────────────────────────────────────────────────
 
 # Feasibility weights — each signal has a weight; sum > threshold = fail
@@ -299,7 +299,7 @@ def layer3_feasibility_check(idea: Idea) -> tuple[bool, str]:
 
 # ─────────────────────────────────────────────────────────
 # LAYER 4: Market Duplicate Check (fixed: token-scored)
-# 第四层：市场重复校验（修复：token级别加权评分）
+# LAYER 4: Market Duplicate (token-weighted scoring)
 # ─────────────────────────────────────────────────────────
 
 def layer4_market_repeat_check(idea: Idea) -> tuple[bool, str]:
@@ -339,7 +339,7 @@ def layer4_market_repeat_check(idea: Idea) -> tuple[bool, str]:
 
 # ─────────────────────────────────────────────────────────
 # LAYER 5: Value Validation
-# 第五层：价值校验
+# LAYER 5: Value Validation
 # ─────────────────────────────────────────────────────────
 
 def layer5_value_check(idea: Idea) -> tuple[bool, str]:
@@ -469,24 +469,24 @@ def five_layer_filter(
 
     if verbose:
         print(f"\n{'='*55}")
-        print(f"  📊 Layer Filter Stats / 五层过滤统计")
+        print(f"  📊 Layer Filter Stats")
         print(f"{'='*55}")
-        print(f"  Total / 总创意:     {stats['total']}")
-        print(f"  L1 Fact / 事实:     ✗ {stats['L1_fact']}")
-        print(f"  L2 Logic / 逻辑:    ✗ {stats['L2_logic']}")
+        print(f"  Total:     {stats['total']}")
+        print(f"  L1 Fact:     ✗ {stats['L1_fact']}")
+        print(f"  L2 Logic:    ✗ {stats['L2_logic']}")
         print(f"  L3 Feasibility:     ✗ {stats['L3_feasibility']}")
-        print(f"  L4 Market / 市场:   ✗ {stats['L4_market']}")
-        print(f"  L5 Value / 价值:    ✗ {stats['L5_value']}")
+        print(f"  L4 Market:   ✗ {stats['L4_market']}")
+        print(f"  L5 Value:    ✗ {stats['L5_value']}")
         print(f"  {'─'*45}")
-        print(f"  ✅ Passed / 通过:   {stats['passed']}/{stats['total']}")
-        print(f"     Pass rate / 通过率: {stats['passed']/max(stats['total'],1)*100:.1f}%")
+        print(f"  ✅ Passed:   {stats['passed']}/{stats['total']}")
+        print(f"     Pass rate: {stats['passed']/max(stats['total'],1)*100:.1f}%")
 
     return passed
 
 
 # ─────────────────────────────────────────────────────────
 # CLI ENTRY (fixed: error handling, encoding, JSONL)
-# CLI入口（修复：错误处理、编码、JSONL支持）
+# CLI ENTRY (error handling, encoding, JSONL)
 # ─────────────────────────────────────────────────────────
 
 def main():
