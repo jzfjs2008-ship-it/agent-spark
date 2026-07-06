@@ -1,10 +1,1 @@
-InterAgent 互操作协议 — 项目方案
-跨AI Agent开放插件标准，一次开发到处运行。
-核心价值：终结AI插件碎片化，让Cursor/MCP/Claude/GPTs共用同一套插件。
-目标用户：插件开发者、AI平台构建者
-解决痛点：每个AI平台各有各的插件格式，开发者要维护多套。
-为什么是现在：MCP协议获得30k+ GitHub Stars，Cursor扩展市场200+第三方扩展，社区对standardization的需求高。
-关键假设：AI平台厂商愿意接受中立的互操作标准。
-MVP范围：interagent.json Schema + Python SDK + MCP桥接器 + Cursor桥接器。
-安全：ED25519签名链 + 权限交叉计算 + 审计日志。
-不收费，开源项目。
+MVP：interagent.json Schema + Python SDK + MCP + Cursor。

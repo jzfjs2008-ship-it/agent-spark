@@ -1,5 +1,4 @@
 ﻿/**
- * agent-spark / ?菜? ??OpenClaw Panel Logic (v2.0)
  * 
  * Implements 5-round interactive interview ??search ??diverge ??filter pipeline.
  */
@@ -10,23 +9,16 @@
   const STEPS = [
     { id: 'domain', icon: '?',
       en: 'What domain do you want ideas for? (or "random")',
-      zh: '雿閬?銝芷??????菜?嚗?瘝⊥??孵???"?"嚗?,
-      placeholder: 'e.g. pet supplies / home organization / 摰?典?' },
     { id: 'pain', icon: '?',
       en: 'What frustrates you in this domain? What\'s inconvenient or broken?',
-      zh: '餈葵憸????芯?銝靘踴???曄??唳嚗?,
       placeholder: 'e.g. cat litter smells, food dispenser jams' },
     { id: 'flaws', icon: '??',
       en: 'What products have you tried? What are their flaws?',
-      zh: '餈葵憸?雿餈鈭漣????銋撩?對?',
       placeholder: 'e.g. Product X is too expensive, Product Y breaks easily' },
     { id: 'style', icon: '?',
       en: 'A) Incremental improvement, or B) Novel creation?',
-      zh: 'A ?寡隡???餈 B ?冽?砍???',
       placeholder: 'A or B' },
-    { id: 'niche', icon: '?儭?,
       en: 'Any niche scenarios or unusual needs?',
-      zh: '?瓷??隡?舀??寞??瘙?',
       placeholder: 'optional' },
   ];
 
@@ -63,14 +55,12 @@
             <label class="style-option ${val === 'A' ? 'selected' : ''}">
               <input type="radio" name="style" value="A" ${val === 'A' ? 'checked' : ''}>
               <span class="option-label">
-                <strong>A</strong> ??Incremental improvement / ?寡隡?
               </span>
               <span class="option-desc">Low risk, easier to build</span>
             </label>
             <label class="style-option ${val === 'B' ? 'selected' : ''}">
               <input type="radio" name="style" value="B" ${val === 'B' ? 'checked' : ''}>
               <span class="option-label">
-                <strong>B</strong> ??Novel creation / ?冽?砍?
               </span>
               <span class="option-desc">Higher risk, higher reward</span>
             </label>
@@ -138,7 +128,6 @@
     // Prompt user to complete flow
     ideasPreview.innerHTML = `
       <div class="flow-complete">
-        <p>??<strong>Interview complete!</strong> / <strong>?桃?摰?嚗?/strong></p>
         <p>Use the <strong>filter engine</strong> to validate AI-generated ideas:</p>
         <code>python3 core/filter/five_layer_filter.py ideas.json</code>
         <br><br>

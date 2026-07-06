@@ -1,6 +1,4 @@
 ﻿/**
- * agent-spark 繚 OpenClaw Search Integration (v2.0)
- * ?菜? 繚 OpenClaw ?揣??
  *
  * Integrates with OpenClaw's built-in web_search interface.
  */
@@ -11,11 +9,8 @@
 
   const SEARCH_DIMENSIONS = {
     pain: [
-      '{domain} ? ?局',
-      '{domain}撣貉??桅? 銝靘?,
     ],
     flaws: [
-      '{domain}鈭批? 撌株? 蝻箇',
       '{domain}review comparison problems',
     ],
     gaps: [
@@ -23,7 +18,6 @@
       '{domain} alternative underserved',
     ],
     niche: [
-      '{domain}撠??箸',
       '{domain} for elderly/children/pets',
     ],
   };

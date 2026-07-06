@@ -1,10 +1,10 @@
-# Architecture Design / 架构设计说明
+# Agent Spark — Architecture Design
 
-## Architecture Diagram / 整体架构图
+## Architecture Diagram
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│               Host Framework / 宿主框架（能力层）               │
+│               Host Framework (Capability Layer)               │
 │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐  │
 │  │ LLM API     │  │ Web Search  │  │ Context/Memory/Auth  │  │
 │  └─────────────┘  └─────────────┘  └──────────────────────┘  │
@@ -12,19 +12,18 @@
                        │ invoke
                        ▼
 ┌──────────────────────────────────────────────────────────────┐
-│               Inspiration Plugin (Business Logic)             │
-│               灵感插件（创意业务层）                            │
-│                                                              │
+│               Agent Spark (Business Logic)                    │
+│                                                               │
 │  ┌──────────────┐    ┌───────────────┐                       │
 │  │ 5-Round      │───▶│ Material Merge│                       │
-│  │ Interview    │    │ (structured   │                       │
-│  │ (questions/) │    │  concatenation)│                       │
+│  │ Interview    │    │ (trivial      │                       │
+│  │              │    │  concatenation)│                       │
 │  └──────────────┘    └───────┬───────┘                       │
 │                              │                               │
 │  ┌──────────────┐    ┌──────▼───────┐                       │
 │  │ Divergence   │◀───│ Web Search   │                       │
-│  │ Prompt Assembly│    │ Material     │                       │
-│  │ (prompts/)   │    │ (cleaned)    │                       │
+│  │ Prompt       │    │ Results      │                       │
+│  │ Assembly     │    │ (cleaned)    │                       │
 │  └──────┬───────┘    └──────────────┘                       │
 │         │                                                    │
 │         ▼                                                    │
@@ -46,13 +45,13 @@
 └──────────────────────────────────────────────────────────────┘
 ```
 
-## Data Flow / 数据流
+## Data Flow
 
 ```
 User Input ──→ Interview Data ──→ Search Keywords ──→ Web Material
                              │
                      ┌───────┴───────┐
-                     │  Merge Pool   │ (structured concatenation)
+                     │  Merge Pool   │
                      └───────┬───────┘
                              │
                      ┌───────▼───────┐
@@ -71,7 +70,7 @@ User Input ──→ Interview Data ──→ Search Keywords ──→ Web Mate
                      └───────┬───────┘
                              │
                      ┌───────▼───────┐
-                     │ Deep Refine   │
+                     │ Deep Refine   │ → Step 8: Audit
                      └───────┬───────┘
                              │
                      ┌───────▼───────┐
@@ -79,13 +78,12 @@ User Input ──→ Interview Data ──→ Search Keywords ──→ Web Mate
                      └───────────────┘
 ```
 
-## 3-Platform Adapter Architecture / 三端适配架构
+## 3-Platform Adapter Architecture
 
 ```
 ┌─────────────────────────────────────────────┐
-│          Inspiration Core Logic              │
-│  灵感 · 业务核心层                           │
-│  (questions + prompts + filter engine)       │
+│          Agent Spark Core Logic              │
+│  (questions + prompts + filter + audit)      │
 └──────┬──────────┬────────────┬──────────────┘
        │          │            │
        ▼          ▼            ▼
@@ -95,45 +93,37 @@ User Input ──→ Interview Data ──→ Search Keywords ──→ Web Mate
 │          │ │          │ │ Bridge    │
 │ Dialogue │ │ UI Panel │ │ Shell     │
 │ Memory   │ │ SQLite   │ │ Script    │
-│ Tool复用 │ │ Visual   │ │ Lightweight│
+│ Tool Reuse│ │ Visual   │ │ Lightweight│
 └──────────┘ └──────────┘ └───────────┘
 ```
 
-## 5-Layer Filter Engine / 五层过滤引擎
+## 5-Layer Filter Engine
 
-| Layer | Name / 名称 | Method / 方式 | Est. Pass Rate / 预估通过率 |
-|-------|-------------|---------------|---------------------------|
-| L1 | Fact Validation / 事实校验 | Real evidence check (v2: not word-count) / 真正证据检查 | ~70% |
-| L2 | Logic Validation / 逻辑校验 | Conflict detection / 冲突检测 | ~85% |
-| L3 | Feasibility / 落地性 | Weighted signal scoring (v2) / 加权评分 | ~75% |
-| L4 | Market Duplicate / 市场重复 | Token-weighted keyword / Token加权关键词 | ~80% |
-| L5 | Value / 价值 | Buzzword density + patterns / 热词密度+模式 | ~85% |
-| | **Cumulative / 总通过率** | | **~30-35%** (not 60-70% as v1 claimed) |
+| Layer | Name | Method | Est. Pass Rate |
+|-------|------|--------|---------------|
+| L1 | Fact Validation | Real evidence check (bigram, not word-count) | ~70% |
+| L2 | Logic Validation | Conflict detection | ~85% |
+| L3 | Feasibility | Weighted signal scoring | ~75% |
+| L4 | Market Duplicate | Token-weighted keyword | ~80% |
+| L5 | Value | Buzzword density + patterns | ~85% |
+| | **Cumulative** | | **~30-35%** |
 
-**Note on pass rates:** The v1.0 claim of "60-70% elimination rate" / "60-70% 淘汰率" was fabricated. Real rates depend heavily on domain and LLM quality. The 30-35% overall pass rate is a more honest starting estimate.
-**关于通过率：** v1.0 声称的"60-70% 淘汰率"是随口预估。实际通过率高度依赖领域和模型质量。30-35% 的总通过率是一个更诚实的估算起点。
+Pass rates are estimates. Real rates depend heavily on domain and LLM quality.
 
-## Tech Stack / 技术栈
+## Tech Stack
 
-| Component / 组件 | Stack / 技术 |
-|------------------|-------------|
-| Filter Engine / 过滤引擎 | Python 3.10+ (stdlib only, zero deps) |
-| Prompts / Prompt 模板 | Markdown (bilingual) |
+| Component | Stack |
+|-----------|-------|
+| Filter Engine | Python 3.10+ (stdlib only, zero deps) |
+| Prompts | Markdown |
 | OpenClaw Plugin | HTML + JS (vanilla, no framework) |
-| Hermes Skill | SKILL.md (bilingual frontmatter) |
+| Hermes Skill | SKILL.md |
 | Claude Code Bridge | Bash (POSIX-compatible) |
-| Storage | None (v1) → SQLite via OpenClaw (v2) |
+| Storage | SQLite via OpenClaw (optional) |
 
-## Known Architecture Limitations / 已知架构限制
+## Known Architecture Limitations
 
-1. **No persistent idea database** — ideas are ephemeral within a session. No historical recall.
-   **没有持久化灵感数据库** — 创意只在会话期间存在，无法历史召回。
-
-2. **Filter engine is hybrid, not pure rule-based** — L3 relies on AI-generated feasibility_score. The "no AI" claim in v1 was misleading.
-   **过滤引擎是混合而非纯规则** — L3 依赖 AI 生成的可行性评分。v1 的"无AI参与"说法有误导性。
-
-3. **"Material merge" is trivial concatenation** — not a real NLP merge. This is a design simplification that may lose cross-references.
-   **"素材合并"仅是字符串拼接** — 不是真正的 NLP 合并。这是一个设计简化，可能丢失交叉引用。
-
+1. **No persistent idea database** — ideas are ephemeral within a session.
+2. **Filter engine is hybrid, not pure rule-based** — L3 relies on AI-generated feasibility_score.
+3. **"Material merge" is trivial concatenation** — not a real NLP merge.
 4. **Search is platform-dependent** — Hermes and OpenClaw have search; Claude Code bridge does not.
-   **搜索依赖平台** — Hermes 和 OpenClaw 有搜索能力，Claude Code 桥接脚本没有。

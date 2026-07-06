@@ -1,6 +1,4 @@
 ﻿/**
- * agent-spark 繚 OpenClaw Storage (v2.0)
- * ?菜? 繚 OpenClaw 摮
  *
  * Persists interview answers and generated ideas to SQLite.
  */

@@ -1,137 +1,116 @@
-# Structured Project Audit / 结构化项目审计
+# Structured Project Audit Checklist
 
-> **Purpose:** Before finalizing any project plan, run this systematic audit to catch errors.
-> **用途：** 任何项目方案在定稿前，必须经过此系统审计以发现错误。
+> Before finalizing any project plan, run this systematic audit to catch errors.
 
----
+## Audit Dimensions
 
-## Audit Dimensions / 审计维度
+| Dimension | Abbr | What it checks |
+|-----------|------|----------------|
+| Logic | LOG | Broken causation, promise vs capability mismatch, contradictions |
+| Structure | STR | Missing modules, wrong ordering, governance gaps, unclear boundaries |
+| Entity | ENT | Unsourced data, factual errors, role confusion |
+| Technical | TEC | Infeasible implementation, security holes, maintainability debt |
 
-| 维度 | 简称 | 检查什么 |
-|------|------|----------|
-| 🔴 Logic | 逻辑错误 | 推理链条断裂、承诺与能力不匹配、自相矛盾 |
-| 🟠 Structure | 结构错误 | 缺失模块、顺序错误、治理缺失、边界不清 |
-| 🟡 Entity | 实体错误 | 数据估算无依据、事实错误、角色混淆 |
-| 🔵 Technical | 技术错误 | 实现不可行、安全漏洞、可维护性差 |
+## Logic Checklist
 
----
+### L1. Is the core promise deliverable?
+- [ ] Can the one-liner survive scrutiny?
+- [ ] If claiming "cross-platform" — how are capability asymmetries handled?
+- [ ] Are unsupported platforms explicitly noted?
 
-## 🔴 Logic Checklist / 逻辑检查清单
+### L2. Is the causal chain complete?
+- [ ] Does the plan address why users would migrate or adopt?
+- [ ] Is "user wants X" confused with "user will pay for X"?
 
-### L1. 核心承诺是否可实现？
-- [ ] 项目的一句话说辞是否经得起质疑？
-- [ ] "一次开发，到处运行" → 各平台的**能力不对称**是否已经处理？
-- [ ] 如果核心承诺在某个平台上不可实现，是否明确标注了例外？
+### L3. Are hidden assumptions surfaced?
+- [ ] What external factors must align? (Platform buy-in, community adoption, API stability)
+- [ ] Is the plan still valuable if all assumptions fail?
 
-### L2. 因果链是否完整？
-- [ ] 方案解决了"为什么用户要用这个"的问题吗？
-- [ ] 是否混淆了"用户想要"和"用户愿意付费/花时间迁移"？
+### L4. Is it logically self-consistent?
+- [ ] Any internal contradictions? ("lightweight" but depends on 5 services)
+- [ ] Does security policy conflict with product goals?
 
-### L3. 存在隐藏假设吗？
-- [ ] 方案依赖哪些外部因素？（平台合作、社区采用、标准演进…）
-- [ ] 这些假设如果全部不成立，方案还有价值吗？
+### L5. Is the network effect overestimated?
+- [ ] How many platforms/plugins/users are needed for a tipping point?
+- [ ] Can MVP reach that threshold?
 
-### L4. 逻辑自洽吗？
-- [ ] 方案内部有矛盾吗？（例：声称"轻量"但依赖 5 个服务）
-- [ ] 安全策略与产品目标冲突吗？（例：权限交叉导致功能残缺）
+## Structure Checklist
 
-### L5. 网络效应被高估了吗？
-- [ ] 声称"平台越多价值越大"——达到网络效应临界点需要多少个平台？
-- [ ] MVP 阶段能达到这个临界点吗？
+### S1. What's missing?
+- [ ] Governance model? (Decision authority, breaking-change process)
+- [ ] Exit plan? (What happens if maintainer leaves?)
+- [ ] Adoption path? (How many steps from "heard about it" to "using it"?)
 
----
+### S2. Is the ordering right?
+- [ ] "Standard before implementation" — should be "PoC before standard."
+- [ ] Is schema locked before real-world validation?
 
-## 🟠 Structure Checklist / 结构检查清单
+### S3. Are boundaries clear?
+- [ ] Explicit "what we won't do" list?
+- [ ] Is security embedded in design or bolted on?
 
-### S1. 缺失了什么？
-- [ ] 项目有**治理模型**吗？（谁决策？Breaking change 流程？）
-- [ ] 有**退出条款**吗？（维护者不干了怎么办？）
-- [ ] 有**采用路径**吗？（用户从"听说"到"用起来"要几步？）
+### S4. Is there an ecosystem entry point?
+- [ ] How do users discover compatible plugins/products?
+- [ ] Discovery/search/ranking mechanism?
 
-### S2. 顺序对吗？
-- [ ] 是否"先标准后实现"？→ 应改为"先 PoC 后标准"
-- [ ] Schema 是否在没有真实用例验证的情况下敲定？
+## Entity Checklist
 
-### S3. 边界清晰吗？
-- [ ] 项目范围有明确边界吗？（做什么 & 明确不做什么）
-- [ ] 安全是嵌入设计还是后加的附件？
+### E1. Do data points have sources?
+- [ ] Market size, user count — based on what?
+- [ ] Are "stars" confused with "developers"?
+- [ ] If data unavailable, is "assumption unvalidated" noted?
 
-### S4. 缺失了生态入口吗？
-- [ ] 协议定义了"怎么写"，但用户怎么"找到"符合协议的插件？
-- [ ] 有没有发现/搜索/评分机制？
+### E2. Fact-checking
+- [ ] Competitive claims sourced? ("biggest" → "according to X")?
+- [ ] Competitor descriptions precise? (Not "App A is slow" but "App A is slow at Y under Z conditions")
 
----
+### E3. Are all role incentives aligned?
+- [ ] Roles listed: developers, users, platform owners, reviewers, maintainers?
+- [ ] Why would each role participate? (Especially platform owners who see standards as threat)
 
-## 🟡 Entity Checklist / 实体检查清单
+### E4. Economic model exists?
+- [ ] Even if free — what's the opportunity cost?
+- [ ] Sustainability: sponsorship? enterprise contracts? volunteer-run?
 
-### E1. 数据有来源吗？
-- [ ] 市场规模、用户数量的估算是**基于什么**？
-- [ ] 是否混淆了"关注者"和"开发者"？（Stars ≠ Developers）
-- [ ] 如果数据不可得，是否标注了"假设未经验证"？
+## Technical Checklist
 
-### E2. 事实核对
-- [ ] 声称"XX 是最大的/最开放的"——有数据支持吗？
-- [ ] 竞品分析中的描述是否精确？（不是"App A 很慢"，而是"App A 在 X 场景下慢"）
+### T1. Is the implementation path feasible?
+- [ ] Does each MVP module have a concrete implementation plan?
+- [ ] "Use AI" is not an implementation plan.
+- [ ] Multi-language bridge maintenance cost accounted for?
 
-### E3. 角色和实体完整吗？
-- [ ] 项目涉及哪些角色？（开发者、用户、平台方、审核者、维护者）
-- [ ] 每个角色的激励是否一致？（例：平台方为什么愿意接受互操作标准？）
+### T2. Is security by default?
+- [ ] Is security a first principle or a separate document?
+- [ ] Is sandboxing/isolation truly realizable on claimed platforms?
+- [ ] Trust anchor problem solved? (How does user verify signatures?)
 
-### E4. 经济模型存在吗？
-- [ ] 即使"不收费"——开发者的机会成本是多少？
-- [ ] 项目的可持续性依赖什么？（赞助？企业合同？B 轮融资？）
+### T3. Edge cases handled?
+- [ ] Input validation? (glob path traversal, null, malformed input)
+- [ ] Offline/degraded behavior?
+- [ ] If generated code has bugs, how does user debug?
 
----
+### T4. Maintainability
+- [ ] Versioning strategy? (compatibility guarantee, migration cycle)
+- [ ] CI/testing plan?
+- [ ] When a new platform appears, how much code must change?
 
-## 🔵 Technical Checklist / 技术检查清单
-
-### T1. 实现路径可行吗？
-- [ ] MVP 的每个模块都有明确的实现方案吗？
-- [ ] "用 AI 解决"——这不是实现方案。
-- [ ] 技术栈的语言/生态一致性如何？多语言桥接器的维护成本算了吗？
-
-### T2. 安全设计是默认还是后加？
-- [ ] 安全是协议的第一性原则，还是独立文档？
-- [ ] 声称的沙箱/隔离在当前平台上**真正可实现**吗？
-- [ ] 签名验证的信任锚问题解决了吗？（用户怎么验证指纹？）
-
-### T3. 边界条件处理了吗？
-- [ ] 用户输入校验有吗？（glob 路径遍历、空值、畸形输入）
-- [ ] 平台离线/降级时行为定义了吗？
-- [ ] 生成代码如果包含 bug，用户怎么调试？
-
-### T4. 可维护性
-- [ ] 自动生成的代码会导致"生成→手动修改→覆盖丢失"的问题吗？
-- [ ] 规范的版本升级策略有吗？（兼容性保证、迁移周期）
-- [ ] 新平台出现时，需要改动多少代码？
-
----
-
-## Audit Report Template / 审计报告模板
+## Audit Report Template
 
 ```markdown
-# Audit Report: [Project Name] / [项目名称] 审计报告
+# Audit Report: [Project Name]
 
-## Summary / 摘要
-- 总问题数：N（逻辑: X / 结构: Y / 实体: Z / 技术: W）
-- 致命问题：N 个（必须修复才能推进）
-- 严重问题：N 个（强烈建议修复）
-- 建议问题：N 个（可以后续优化）
+## Summary
+- Total findings: N (Logic: X / Structure: Y / Entity: Z / Technical: W)
+- Critical: N (must fix before proceeding)
+- Major: N (strongly recommended)
 
-## 🔴 Logic Errors / 逻辑错误
-...
+## Findings
+### Critical
+### Major
+### Minor
 
-## 🟠 Structural Errors / 结构错误
-...
-
-## 🟡 Entity Errors / 实体错误
-...
-
-## 🔵 Technical Errors / 技术错误
-...
-
-## Priority Recommendations / 优先级建议
-### Must Fix / 必须修复
-### Should Fix / 应该修复
-### Could Fix / 可以优化
+## Priority Recommendations
+### Must Fix
+### Should Fix
+### Could Fix
 ```

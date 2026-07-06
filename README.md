@@ -1,7 +1,6 @@
 <div align="center">
   <h1>⚡ Agent Spark</h1>
   <p><strong>The Creative Engine for AI Agents</strong></p>
-  <p><em>智能体创意引擎 — 让 AI Agent 像产品经理一样挖掘真实需求、批量产出一流创意</em></p>
 
   <p>
     <a href="https://github.com/jzfjs2008-ship-it/agent-spark">
@@ -253,4 +252,3 @@ MIT © [Nous Research](https://nousresearch.com).
     ⚡ <b>Agent Spark</b> — the creative engine for AI Agents.<br>
     <a href="https://github.com/jzfjs2008-ship-it/agent-spark">Star us on GitHub</a>
   </sub>
-</div>
