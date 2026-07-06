@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-spark"
+version = "0.99.0"
+description = "AI Agent creative idea pipeline — mine real needs, diverge with AI across 6 dimensions, converge with a 5-layer quality filter. Zero deps, pip install. 智能体创意挖掘引擎 — 全网痛点挖掘→AI发散→五层过滤→落地方案导出。"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Hermes Agent", email = "opensource@nousresearch.com"}
+]
+keywords = [
+    "ai-agent", "agent-tools", "idea-generation", "creativity", "brainstorming",
+    "innovation", "llm", "ai-filter", "creative-mining",
+    "智能体", "创意挖掘", "头脑风暴"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users / Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/jzfjs2008-ship-it/agent-spark"
+Repository = "https://github.com/jzfjs2008-ship-it/agent-spark"
+Documentation = "https://github.com/jzfjs2008-ship-it/agent-spark#readme"
+Issues = "https://github.com/jzfjs2008-ship-it/agent-spark/issues"
+
+[project.scripts]
+agent-spark-demo = "agent_spark.demo:main"
+agent-spark-demo-full = "agent_spark.demo_full:main"
+agent-spark-filter = "agent_spark.filter.five_layer_filter:main"
+agent-spark-audit = "agent_spark.audit.auditor:main"
+
+[tool.setuptools.packages.find]
+include = ["agent_spark", "agent_spark.*"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+search = ["httpx>=0.27"]

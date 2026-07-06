@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inspiration · 灵感 — Creative Mining Panel</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<div id="app">
+  <!-- Header -->
+  <div id="header">
+    <span class="icon">💡</span>
+    <h1>Inspiration · 灵感</h1>
+    <span id="step-indicator">Step 1/5</span>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="progress"><div id="progress-fill" style="width:20%"></div></div>
+
+  <!-- Step content -->
+  <div id="step-container">
+    <!-- Dynamically loaded by panel.js -->
+  </div>
+
+  <!-- Navigation buttons -->
+  <div id="nav">
+    <button id="btn-prev" disabled>← Back / 上一步</button>
+    <button id="btn-next">Next / 下一步 →</button>
+  </div>
+
+  <!-- Output / search results area -->
+  <div id="output" style="display:none;">
+    <h3>🔍 Search Results / 搜索结果</h3>
+    <div id="search-results"></div>
+    <h3>💡 Generated Ideas / 创意预览</h3>
+    <div id="ideas-preview"></div>
+    <button id="btn-export">📥 Export / 导出方案</button>
+  </div>
+</div>
+
+<script src="panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "products": [
+    {"name": "Notion", "field": "notes/docs", "keywords": {"笔记": 3, "文档": 2, "知识库": 3, "wiki": 3, "database": 2, "block": 2}},
+    {"name": "Obsidian", "field": "knowledge mgmt", "keywords": {"笔记": 2, "双向链接": 4, "图谱": 3, "本地": 2, "markdown": 1, "插件": 2}},
+    {"name": "小红书", "field": "social/lifestyle", "keywords": {"种草": 4, "笔记": 1, "生活方式": 3, "评测": 2, "分享": 1, "社区": 2}},
+    {"name": "ChatGPT", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "LLM": 2, "大模型": 2, "聊天机器人": 2, "GPT": 4}},
+    {"name": "Claude", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "长文": 3, "分析": 2, "Claude": 4, "artifacts": 3}},
+    {"name": "Figma", "field": "UI design", "keywords": {"设计": 1, "UI": 3, "原型": 3, "协作设计": 4, "组件": 2, "auto layout": 3}},
+    {"name": "Canva", "field": "graphic design", "keywords": {"设计": 1, "模板": 3, "海报": 3, "图形": 1, "拖拽": 2, "社交媒体": 2}},
+    {"name": "飞书/Lark", "field": "collaboration", "keywords": {"办公": 1, "协作": 3, "文档": 1, "IM": 2, "会议": 2, "OKR": 3}},
+    {"name": "Slack", "field": "team chat", "keywords": {"团队": 2, "聊天": 1, "channel": 3, "通讯": 1, "集成": 2, "bot": 2}},
+    {"name": "微信", "field": "social/chat", "keywords": {"社交": 2, "聊天": 2, "朋友圈": 3, "小程序": 3, "支付": 2, "公众号": 3}},
+    {"name": "Photoshop", "field": "image editing", "keywords": {"修图": 3, "PS": 4, "图像处理": 2, "滤镜": 2, "图层": 3, "蒙版": 3}},
+    {"name": "GitHub", "field": "code hosting", "keywords": {"代码": 1, "版本控制": 3, "开源": 3, "PR": 3, "issue": 2, "仓库": 2}},
+    {"name": "Cursor", "field": "AI coding", "keywords": {"AI编程": 4, "代码生成": 3, "Copilot": 2, "编辑器": 2, "IDE": 2, "自动补全": 2}},
+    {"name": "拼多多", "field": "e-commerce", "keywords": {"拼团": 4, "低价": 2, "社交电商": 3, "砍价": 3, "百亿补贴": 3}},
+    {"name": "抖音/TikTok", "field": "short video", "keywords": {"短视频": 3, "直播": 2, "算法推荐": 3, "内容": 1, "feed": 2, "带货": 2}}
+  ],
+  "buzzwords": [
+    "智能", "AI", "互联网+", "数字化", "云端", "大数据",
+    "区块链", "元宇宙", "赋能", "生态", "闭环", "抓手",
+    "打通", "对齐", "颗粒度", "底层逻辑", "降维打击",
+    "颠覆", "重构", "重塑"
+  ],
+  "feasibility_signals": [
+    {"weight": 2.0, "label": "hardware-heavy", "pattern": "硬件|hardware|芯片|chip|开模|mold"},
+    {"weight": 3.0, "label": "requires manufacturing", "pattern": "生产线|manufacturing|工厂|factory"},
+    {"weight": 2.5, "label": "needs external funding", "pattern": "融资|funding|投资|invest"},
+    {"weight": 2.0, "label": "regulatory hurdle", "pattern": "专利|patent|审批|approval|license|许可证"},
+    {"weight": 1.5, "label": "large team required", "pattern": "团队.{0,4}(10|几十|百)"},
+    {"weight": 2.5, "label": "infra-level build", "pattern": "操作系统|OS|自研引擎|proprietary engine"},
+    {"weight": 3.0, "label": "owns physical plant", "pattern": "自建(?:工厂|产线|数据中心)"},
+    {"weight": 1.0, "label": "uses sensors", "pattern": "传感器|sensor"},
+    {"weight": 0.8, "label": "multi-platform", "pattern": "多端同步|multi-platform"},
+    {"weight": 0.8, "label": "realtime requirement", "pattern": "实时通信|realtime"},
+    {"weight": 1.0, "label": "high-concurrency need", "pattern": "高并发|high concurrency"}
+  ],
+  "feasibility_threshold": 4.0,
+  "market_duplicate_threshold": 6.0
+}

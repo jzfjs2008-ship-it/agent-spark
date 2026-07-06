@@ -1,0 +1,36 @@
+﻿{
+  "id": "agent-spark",
+  "name": "?菜? / agent-spark",
+  "version": "2.0.0",
+  "description": "Full-scene creative mining plugin ??web pain-point harvesting ??AI divergence (6 dimensions) ??5-layer convergence filter ??project plan export. ?典?臬?????隞塚??函??????蝏游漲AI???撅?皛手??寞?撖澆??,
+  "author": "Hermes Agent",
+  "license": "MIT",
+  "icon": "lightbulb",
+  "permissions": ["web_search", "storage", "export", "model_invoke"],
+  "ui": {
+    "panel": "panel.html",
+    "width": 600,
+    "height": 700
+  },
+  "actions": [
+    {
+      "id": "start_interview",
+      "label": "New Session / ?唬?霂?,
+      "icon": "plus-circle"
+    },
+    {
+      "id": "run_filter",
+      "label": "Run Filter / 餈?餈誘",
+      "icon": "filter"
+    }
+  ],
+  "storage": {
+    "type": "sqlite",
+    "path": "plugins/agent-spark/agent-spark.db"
+  },
+  "dependencies": {
+    "runtime": ["python3"],
+    "libraries": []
+  }
+}
+

@@ -1,0 +1,1 @@
+    data_markers = re.findall(r"(\d[\d,]*[kKmMbB]?\+?|\d+%|\d+ stars|\d+ users)", cleaned)
