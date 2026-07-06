@@ -391,11 +391,38 @@ def five_layer_filter(
     user_pain_points: list[str] | None = None,
     web_evidence_list: list[str] | None = None,
     verbose: bool = True,
+    locale: str | None = None,
 ) -> list[dict[str, Any]]:
-    """Run all 5 layers on a batch of ideas."""
+    """Run all 5 layers on a batch of ideas.
+    
+    Args:
+        ideas: AI-generated ideas to filter.
+        user_pain_points: Real pain points from user.
+        web_evidence_list: Web-sourced evidence strings.
+        verbose: Print per-idea results.
+        locale: "en", "zh", or None for auto-detect (from user_pain_points).
+    """
 
     pain = user_pain_points or []
     evidence = web_evidence_list or []
+
+    # ── Locale auto-detect ──
+    if locale is None:
+        locale = "zh" if any("\u4e00" <= c <= "\u9fff" for text in pain + evidence for c in text) else "en"
+    _ = lambda en, zh: zh if locale == "zh" else en
+
+    # ── Stats labels ──
+    L = lambda en, zh: zh if locale == "zh" else en
+    labels = {
+        "total": _("Total", "总创意"),
+        "fact": _("L1 Fact", "L1 事实"),
+        "logic": _("L2 Logic", "L2 逻辑"),
+        "feasibility": _("L3 Feasibility", "L3 落地性"),
+        "market": _("L4 Market", "L4 市场"),
+        "value": _("L5 Value", "L5 价值"),
+        "passed": _("Passed", "通过"),
+        "pass_rate": _("Pass rate", "通过率"),
+    }
 
     passed: list[dict[str, Any]] = []
     stats = {
@@ -469,17 +496,17 @@ def five_layer_filter(
 
     if verbose:
         print(f"\n{'='*55}")
-        print(f"  📊 Layer Filter Stats")
+        print(f"  📊 {_('Layer Filter Stats', '五层过滤统计')}")
         print(f"{'='*55}")
-        print(f"  Total:     {stats['total']}")
-        print(f"  L1 Fact:     ✗ {stats['L1_fact']}")
-        print(f"  L2 Logic:    ✗ {stats['L2_logic']}")
-        print(f"  L3 Feasibility:     ✗ {stats['L3_feasibility']}")
-        print(f"  L4 Market:   ✗ {stats['L4_market']}")
-        print(f"  L5 Value:    ✗ {stats['L5_value']}")
+        print(f"  {_('Total', '总创意')}:     {stats['total']}")
+        print(f"  {_('L1 Fact', 'L1 事实')}:     ✗ {stats['L1_fact']}")
+        print(f"  {_('L2 Logic', 'L2 逻辑')}:    ✗ {stats['L2_logic']}")
+        print(f"  {_('L3 Feasibility', 'L3 落地性')}:     ✗ {stats['L3_feasibility']}")
+        print(f"  {_('L4 Market', 'L4 市场')}:   ✗ {stats['L4_market']}")
+        print(f"  {_('L5 Value', 'L5 价值')}:    ✗ {stats['L5_value']}")
         print(f"  {'─'*45}")
-        print(f"  ✅ Passed:   {stats['passed']}/{stats['total']}")
-        print(f"     Pass rate: {stats['passed']/max(stats['total'],1)*100:.1f}%")
+        print(f"  ✅ {_('Passed', '通过')}:   {stats['passed']}/{stats['total']}")
+        print(f"     {_('Pass rate', '通过率')}: {stats['passed']/max(stats['total'],1)*100:.1f}%")
 
     return passed
 
