@@ -1,11 +1,12 @@
-# Interactive 5-Round Inspiration Interview (v2.0)
+# Interactive 5-Round Inspiration Interview (v2.1)
 
 ## Design Principles
 
 - Ask about needs, not about tech.
-- From broad to specific: domain → pain points → flaws → style → niche.
+- From broad to specific: domain → intent anchor → pain points → flaws → style → niche.
 - Minimal, low-pressure, anyone can answer.
 - If user says "none/skip" → web-sourced material supplements.
+- **v2.1: Round 1.5 intent anchoring added to prevent domain/outcome conflation.**
 
 ---
 
@@ -16,6 +17,31 @@
 
 **Expected answers:**
 home organization / pet supplies / remote work tools / personal knowledge management / random
+
+---
+
+## Round 1.5 · Intent Anchor (CRITICAL)
+
+After Round 1 and BEFORE Round 2, **MUST** paraphrase your understanding back and get explicit confirmation.
+
+**Checklist:**
+- [ ] Restate the domain in your own words
+- [ ] Explicitly separate "domain to explore" from "desired outcome/proxy"
+- [ ] If the user's answer conflates both, tease them apart and ask which is which
+- [ ] Only continue to Round 2 after user confirms
+
+**Example of conflation detection:**
+- User says: "大模型相关github涨星项目"
+- Bad: treating "github涨星工具" as the domain
+- Good: "So the domain is LLM ecosystem open-source projects, and stars are the natural success metric — not a tool to help others gain stars. Correct?"
+
+**Example of conflation detection (English):**
+- User says: "AI tools that get a lot of Twitter engagement"
+- Bad: treating "Twitter engagement tools" as the domain
+- Good: "So the domain is AI tools, and Twitter engagement is the proxy for 'people love this idea.' You want AI tools that are inherently share-worthy. Right?"
+
+**Why this exists:**
+Without this step, Round 2 ("what frustrates you in this domain?") can latch onto the wrong part of a compound answer. Once the pipeline locks onto a misidentified domain, all downstream steps amplify the error.
 
 ---
 
@@ -71,6 +97,7 @@ home organization / pet supplies / remote work tools / personal knowledge manage
   "locale": "en",
   "answers": {
     "round1_domain": "home organization",
+    "round1_5_intent_anchor": "Confirmed: domain is home organization products",
     "round2_pain_points": ["not enough outlets", "drawers hard to organize"],
     "round3_existing_products": [
       {"name": "IKEA shelving", "flaws": ["size not flexible"]}
@@ -87,4 +114,4 @@ home organization / pet supplies / remote work tools / personal knowledge manage
 ## Reset Rules
 
 - Clear all session data and start fresh.
-- Re-ask all 5 rounds.
+- Re-ask all 5 rounds (Round 1.5 intent anchor runs automatically after Round 1).

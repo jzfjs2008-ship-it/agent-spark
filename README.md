@@ -45,7 +45,7 @@
 Agent Spark is a **Python skill for AI Agents** — a structured creative-idea pipeline that fits inside any Agent's tool belt:
 
 ```
-Agent interacts with user (5 rounds)
+Agent interacts with user (5 rounds + intent anchor)
     ↓
 Agent searches the web for real pain points
     ↓
@@ -124,13 +124,14 @@ agent-spark-demo                                 # see it in action
 
 ## 🏗️ Pipeline
 
-### Step 1 · 5-Round Agent Interview
+### Step 1 · 5-Round Agent Interview + Intent Anchor
 
 Your agent asks one question at a time:
 
 | # | Question |
 |---|----------|
 | 1 | What domain needs ideas? |
+| 1.5 | **Intent Anchor** — paraphrase understanding, confirm before continuing |
 | 2 | What frustrates you there? |
 | 3 | What existing products have flaws? |
 | 4 | A) Incremental or B) Novel? |
@@ -212,7 +213,7 @@ agent-spark/
 ├── agent_spark/           # Python package
 │   ├── filter/            # 5-layer convergence filter
 │   ├── prompts/           # Divergence & refinement templates
-│   ├── questions/         # 5-round interview system
+│   ├── questions/         # 5-round interview system + intent anchor (v2.1)
 │   ├── search/            # Optional web search (pip install .[search])
 │   ├── audit/             # Structured project audit (NEW)
 │   └── data/              # Configurable product/buzzword rules

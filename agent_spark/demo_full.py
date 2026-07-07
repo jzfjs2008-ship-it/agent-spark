@@ -14,11 +14,12 @@ from agent_spark.filter.five_layer_filter import five_layer_filter
 
 
 # ═══════════════════════════════════════════════════════
-# STEP 1 · 5-Round Interview (simulated)
+# STEP 1 · 5-Round Interview + Intent Anchor (simulated)
 # ═══════════════════════════════════════════════════════
 
 INTERVIEW = {
     "round1_domain": "pet supplies / 宠物用品",
+    "round1_5_intent_anchor": "Confirmed: domain is pet supplies products",
     "round2_pain_points": [
         "Automatic feeders jam frequently",
         "Cat litter tracking all over the house",

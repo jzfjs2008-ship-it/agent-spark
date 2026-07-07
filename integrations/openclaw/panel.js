@@ -1,6 +1,6 @@
 ﻿/**
  * 
- * Implements 5-round interactive interview ??search ??diverge ??filter pipeline.
+ * Implements 5-round interactive interview + intent anchor ? search ? diverge ? filter pipeline.
  */
 (function() {
   'use strict';
@@ -9,6 +9,10 @@
   const STEPS = [
     { id: 'domain', icon: '?',
       en: 'What domain do you want ideas for? (or "random")',
+      placeholder: 'e.g. pet supplies, LLM tools, home organization' },
+    { id: 'intent_anchor', icon: '🎯',
+      en: 'Intent Anchor — just to confirm your domain. Is this correct?',
+      placeholder: 'Yes / No (please clarify)' },
     { id: 'pain', icon: '?',
       en: 'What frustrates you in this domain? What\'s inconvenient or broken?',
       placeholder: 'e.g. cat litter smells, food dispenser jams' },
@@ -45,7 +49,23 @@
     progressFill.style.width = `${((idx+1)/STEPS.length)*100}%`;
     btnPrev.disabled = idx === 0;
 
-    if (step.id === 'style') {
+    if (step.id === 'intent_anchor') {
+      const domainVal = answers.domain || '(no domain entered)';
+      stepContainer.innerHTML = `
+        <div class="step-card">
+          <div class="step-icon">${step.icon}</div>
+          <p class="step-question-en">${step.en}</p>
+          <p class="step-question-zh">${step.zh}</p>
+          <div class="anchor-confirm">
+            <div class="anchor-domain">📌 <strong>${domainVal}</strong></div>
+            <textarea id="step-input" rows="2" placeholder="${step.placeholder}">${val}</textarea>
+          </div>
+        </div>`;
+      const input = document.getElementById('step-input');
+      input.addEventListener('input', function() {
+        answers[step.id] = this.value;
+      });
+    } else if (step.id === 'style') {
       stepContainer.innerHTML = `
         <div class="step-card">
           <div class="step-icon">${step.icon}</div>
