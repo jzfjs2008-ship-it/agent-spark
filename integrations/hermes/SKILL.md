@@ -1,5 +1,5 @@
 ---
-description: "Use when the user wants to generate practical, market-verified creative ideas. Follows a 7-step pipeline: interactive Q&A → web pain-point mining → AI divergence (6 dimensions) → 5-layer convergence filter → archiving → single-idea deep refinement → export. Bilingual (English + Chinese)."
+description: "Trigger: '给我灵感' / '给我创意' / 'give me ideas' / 'I need inspiration for [domain]'. Runs the full 6-round interview + AI divergence + 5-layer filter + audit pipeline. Bilingual (auto-detects EN/ZH from user input)."
 version: 2.1.0
 author: Hermes Agent
 license: MIT
@@ -21,9 +21,16 @@ User Interview (5 rounds + intent anchor) → Web Pain Mining → Material Merge
 Mine real needs from the web, batch-purify with human-AI collaboration, output only grounded, useful, actionable ideas.
 
 
-Load this skill when the user says:
+**Trigger by saying / 触发短语:**
 
-- "I need creative ideas for [domain]" / "给我创意/想法/灵感"
+| English | 中文 |
+|---------|------|
+| "give me ideas" | "给我灵感" |
+| "I need inspiration for [domain]" | "给我创意" |
+| "brainstorm [domain]" | "我想在 XX 领域找创意" |
+| "creative ideas for [domain]" | "帮我挖一下 XX 的痛点" |
+
+**On trigger, immediately start Round 1. Do NOT explain what the pipeline is — just ask the first question.**
 
 **Don't use for:**
 - Pure technical architecture (`spike` or `plan` instead)

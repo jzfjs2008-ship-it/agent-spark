@@ -110,6 +110,7 @@ pip install agent-spark
 echo '{"ideas": [...]}' | agent-spark-filter    # filter ideas
 cat plan.md | agent-spark-audit                  # audit a project plan
 agent-spark-demo                                 # see it in action
+agent-spark-pipeline                             # run the full interview pipeline
 ```
 
 ### As a Hermes / Claude Code Skill
