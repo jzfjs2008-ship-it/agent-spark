@@ -5,8 +5,8 @@ Inspiration · One-shot demo
 Run without any arguments to see the filter engine in action.
 
 Usage:
-    inspiration-demo                  # interactive demo
-    python -m inspiration.demo         # same thing
+    agent-spark-demo                  # interactive demo
+    python -m agent_spark.demo         # same thing
 """
 
 from agent_spark.filter.five_layer_filter import five_layer_filter
@@ -121,7 +121,7 @@ def main():
 
     print()
     print("=" * 60)
-    print("  ✨ Demo complete!  Try `inspiration-filter ideas.json`")
+    print("  ✨ Demo complete!  Try `agent-spark-filter ideas.json`")
     print("     or import in your own project:")
     print()
     print("     from agent_spark.filter.five_layer_filter import five_layer_filter")

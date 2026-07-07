@@ -3,7 +3,7 @@ Inspiration · Optional Web Search Integration
 ==============================================
 Integrates with search APIs to automate Step 2 (Web Pain Mining).
 
-Install: pip install inspiration-filter[search]
+Install: pip install agent-spark[search]
 or:      pip install httpx
 
 Usage:
@@ -85,7 +85,7 @@ def search_pain_points(
     """
     if not HAS_HTTPX:
         raise ImportError(
-            "httpx is required for search. Install: pip install inspiration-filter[search]"
+            "httpx is required for search. Install: pip install agent-spark[search]"
         )
 
     api_key = api_key or os.environ.get("TAVILY_API_KEY") or os.environ.get("SERPAPI_KEY")

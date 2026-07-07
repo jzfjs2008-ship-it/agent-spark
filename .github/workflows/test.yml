@@ -34,5 +34,5 @@ jobs:
 
       - name: Run demo
         run: |
-          python -m inspiration.filter.five_layer_filter --help || true
-          inspiration-demo
+          python -m agent_spark.filter.five_layer_filter --help || true
+          agent-spark-demo

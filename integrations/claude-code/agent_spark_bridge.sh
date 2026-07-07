@@ -20,8 +20,8 @@ set -euo pipefail
 # ?? Project root (works even with symlinks) ??
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-FILTER_ENGINE="$PROJECT_DIR/core/filter/five_layer_filter.py"
-DIVERGE_PROMPT="$PROJECT_DIR/core/prompts/diverge.md"
+FILTER_ENGINE="$PROJECT_DIR/agent_spark/filter/five_layer_filter.py"
+DIVERGE_PROMPT="$PROJECT_DIR/agent_spark/prompts/diverge.md"
 
 # ?? Detect language preference ??
 # If domain contains Chinese characters ??use Chinese
@@ -164,7 +164,7 @@ if [ -f "$FILTER_ENGINE" ]; then
 fi
 
 # ?? Refinement prompt reference ??
-REFINE_PROMPT="$PROJECT_DIR/core/prompts/refine.md"
+REFINE_PROMPT="$PROJECT_DIR/agent_spark/prompts/refine.md"
 if [ -f "$REFINE_PROMPT" ]; then
     echo "  $REFINE_PROMPT"
     echo ""

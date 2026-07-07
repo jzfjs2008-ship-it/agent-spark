@@ -17,10 +17,13 @@
     {"name": "抖音/TikTok", "field": "short video", "keywords": {"短视频": 3, "直播": 2, "算法推荐": 3, "内容": 1, "feed": 2, "带货": 2}}
   ],
   "buzzwords": [
-    "智能", "AI", "互联网+", "数字化", "云端", "大数据",
+    "互联网+", "数字化", "云端", "大数据",
     "区块链", "元宇宙", "赋能", "生态", "闭环", "抓手",
     "打通", "对齐", "颗粒度", "底层逻辑", "降维打击",
     "颠覆", "重构", "重塑"
+  ],
+  "buzzwords_common": [
+    "智能", "AI"
   ],
   "feasibility_signals": [
     {"weight": 2.0, "label": "hardware-heavy", "pattern": "硬件|hardware|芯片|chip|开模|mold"},

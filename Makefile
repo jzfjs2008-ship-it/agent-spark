@@ -10,12 +10,12 @@ test:
 
 # Run demo
 demo:
-	python -m agent-spark.filter.five_layer_filter --help
+	python -m agent_spark.filter.five_layer_filter --help
 	agent-spark-demo
 
 # Run filter engine on a JSON file
 filter:
-	python -m agent-spark.filter.five_layer_filter $(FILE)
+	python -m agent_spark.filter.five_layer_filter $(FILE)
 
 # Clean generated files
 clean:

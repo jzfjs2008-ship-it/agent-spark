@@ -1,22 +1,11 @@
+# Security Annex
 
-
----
-
-
-
-
-```
-```
-
-
-
-
-
+> **TODO:** This document is incomplete — original content was lost during a rename/migration.
+> Contributions welcome to fill in the security architecture details for Agent Spark.
 
 ---
 
-
-interagent.json  `security` ：
+## interagent.json `security` field
 
 ```json
 {
@@ -55,38 +44,35 @@ interagent.json  `security` ：
 }
 ```
 
+## Permission Model
 
-|----------------|----------|-------------|-----------------|
+| Category | Default | User-Overridable | Plugin-Declarable |
+|----------|---------|-------------------|-------------------|
 
-
-|----------|-----|--------|------|---------|
-
----
-
-
+## Signing & Verification
 
 ```
        ▼
 ┌─────────────────────┐
-│  interagent.json    │ ←  signer（ DID）+ signature
+│  interagent.json    │ ← signer (DID) + signature
 └────────┬────────────┘
          ▼
 ┌─────────────────────┐
+│  Bridge validates   │
 └─────────────────────┘
 ```
 
+## Trust Flow
 
 ```
-1.  → InterAgent SDK  interagent.json
-3. SDK  signature  interagent.json 
+1. Developer → InterAgent SDK → interagent.json
+3. SDK validates signature against interagent.json
 ```
 
+| Step | Actor | Action |
+|------|-------|--------|
 
-|------|----------|
-
----
-
-
+## Sandbox
 
 ```yaml
 sandbox:
@@ -95,22 +81,20 @@ sandbox:
   process:
 ```
 
+| Resource | Default Limit | Configurable | Notes |
+|----------|---------------|--------------|-------|
 
-|------|---------|----------------|
-
----
-
-
+## Audit Trail
 
 ```
-：interagent.json（）
+Audit log format: interagent.json (signed)
  ↓
  ↓
  ↓
  ↓
 ```
 
-**：**  `audit-{timestamp}.json`：
+**Audit record:** `audit-{timestamp}.json`:
 
 ```json
 {
@@ -130,19 +114,16 @@ sandbox:
 
 ---
 
+## Cost Estimate
 
-
-|------|-------------|----------|
-| interagent.json Schema |  `security.permissions`  + `security.signing` | +3  |
-
-
+| Component | Effort | Risk | Notes |
+|-----------|--------|------|-------|
+| interagent.json Schema | Add `security.permissions` + `security.signing` | +3 | |
 
 ---
 
+## Open Questions
 
 ```
-
-
-
-
+(TODO: Fill in open security questions)
 ```

@@ -136,10 +136,9 @@ if run:
         if results:
             st.subheader("✅ Passed Ideas")
             for r in results:
-                idea = next(
-                    (i for i in ideas if ideas.index(i) == r["index"]), None
-                )
-                if idea:
+                idx = r["index"]
+                if 0 <= idx < len(ideas):
+                    idea = ideas[idx]
                     st.success(f"**{idea['title']}** — {idea.get('one_line', '')}")
 
     except json.JSONDecodeError as e:

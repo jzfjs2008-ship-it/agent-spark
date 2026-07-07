@@ -6,7 +6,7 @@ Simulates the complete 7-step pipeline with sample data.
 No API key, no internet, runs entirely offline.
 
 Usage:
-    python -m inspiration.demo_full
+    python -m agent_spark.demo_full
 """
 
 import json
@@ -183,7 +183,7 @@ def main():
     print(f"  {'#':<4} {'Title':<32} {'Feas.':<6} {'Nov.':<6} {'Dim':<4}")
     print(f"  {'—'*3} {'—'*30} {'—'*5} {'—'*5} {'—'*3}")
     for i, r in enumerate(results, 1):
-        idea = r["idea"]
+        idea = AI_GENERATED_IDEAS[r["index"]]
         print(f"  {i:<4} {idea['title']:<32} {idea['feasibility_score']:<6} {idea['novelty_score']:<6} {idea['dimension']:<4}")
 
     # Step 7: Refinement (simulated)
@@ -194,7 +194,7 @@ def main():
     print()
 
     # Print a sample refinement summary
-    winner = results[0]["idea"] if results else None
+    winner = AI_GENERATED_IDEAS[results[0]["index"]] if results else None
     if winner:
         print("  ╔" + "═" * 55 + "╗")
         print(f"  ║  {winner['title']} — Project Plan Summary{' ' * (40 - len(winner['title']))}║")
@@ -212,9 +212,9 @@ def main():
     print("  ✅ Full pipeline demo complete!")
     print()
     print("  Next steps:")
-    print("    pip install inspiration-filter")
-    print("    inspiration-demo")
-    print("    cat ideas.json | inspiration-filter")
+    print("    pip install agent-spark")
+    print("    agent-spark-demo")
+    print("    cat ideas.json | agent-spark-filter")
     print("=" * 65)
 
 

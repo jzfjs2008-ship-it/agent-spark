@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Inspiration · Five-Layer Industrial Convergence Filter
-Five-Layer Industrial Convergence Filter
+Agent Spark · Five-Layer Industrial Convergence Filter
 =========================================================
 Core quality-control engine — hybrid rule-based + AI-assisted validation.
-Core quality-control engine — rule-based + AI-assisted validation.
 
 Key fixes vs v1.0:
   [FIX] L1: replaced pure word-count check with actual fact validation
@@ -27,7 +25,6 @@ Idea = dict[str, Any]
 
 # ─────────────────────────────────────────────────────────
 # CONFIGURATION LOADING
-# Config — load from JSON, fall back to hardcoded
 # ─────────────────────────────────────────────────────────
 
 import os
@@ -55,38 +52,42 @@ _CONFIG = _load_config()
 # Each entry has weighted keywords: (term, weight).
 # Higher weight = more distinctive for that product.
 # Generic words like "AI" get lower weight to avoid false positives.
-# Can be customized by editing inspiration/data/defaults.json
+# Can be customized by editing agent_spark/data/defaults.json
 
 MATURE_PRODUCTS: list[dict[str, Any]] = _CONFIG.get("products") or [
     # Office / productivity
-    {"name": "Notion", "field": "notes/docs", "keywords": {"笔记": 3, "文档": 2, "知识库": 3, "wiki": 3, "database": 2, "block": 2}},
-    {"name": "飞书/Lark", "field": "collaboration", "keywords": {"办公": 1, "协作": 3, "文档": 1, "IM": 2, "会议": 2, "OKR": 3}},
-    {"name": "Slack", "field": "team chat", "keywords": {"团队": 2, "聊天": 1, "channel": 3, "通讯": 1, "集成": 2, "bot": 2}},
-    {"name": "Obsidian", "field": "knowledge mgmt", "keywords": {"笔记": 2, "双向链接": 4, "图谱": 3, "本地": 2, "markdown": 1, "插件": 2}},
-    {"name": "微信", "field": "social/chat", "keywords": {"社交": 2, "聊天": 2, "朋友圈": 3, "小程序": 3, "支付": 2, "公众号": 3}},
+    {"name": "Notion", "field": "notes/docs", "keywords": {"笔记": 3, "文档": 2, "知识库": 3, "wiki": 3, "database": 2, "block": 2, "notes": 3, "docs": 2, "knowledge base": 3}},
+    {"name": "飞书/Lark", "field": "collaboration", "keywords": {"办公": 1, "协作": 3, "文档": 1, "IM": 2, "会议": 2, "OKR": 3, "collaboration": 3, "messaging": 2, "meeting": 2}},
+    {"name": "Slack", "field": "team chat", "keywords": {"团队": 2, "聊天": 1, "channel": 3, "通讯": 1, "集成": 2, "bot": 2, "team": 2, "chat": 2, "integration": 2}},
+    {"name": "Obsidian", "field": "knowledge mgmt", "keywords": {"笔记": 2, "双向链接": 4, "图谱": 3, "本地": 2, "markdown": 1, "插件": 2, "backlink": 4, "graph": 3, "local": 2, "plugin": 2}},
+    {"name": "微信", "field": "social/chat", "keywords": {"社交": 2, "聊天": 2, "朋友圈": 3, "小程序": 3, "支付": 2, "公众号": 3, "social": 2, "chat": 2, "payment": 2, "mini program": 3}},
     # Design
-    {"name": "Figma", "field": "UI design", "keywords": {"设计": 1, "UI": 3, "原型": 3, "协作设计": 4, "组件": 2, "auto layout": 3}},
-    {"name": "Canva", "field": "graphic design", "keywords": {"设计": 1, "模板": 3, "海报": 3, "图形": 1, "拖拽": 2, "社交媒体": 2}},
+    {"name": "Figma", "field": "UI design", "keywords": {"设计": 1, "UI": 3, "原型": 3, "协作设计": 4, "组件": 2, "auto layout": 3, "design": 1, "prototype": 3, "component": 2, "collaborative design": 4}},
+    {"name": "Canva", "field": "graphic design", "keywords": {"设计": 1, "模板": 3, "海报": 3, "图形": 1, "拖拽": 2, "社交媒体": 2, "template": 3, "poster": 3, "graphic": 1, "drag": 2, "social media": 2}},
     # AI/LLM
-    {"name": "ChatGPT", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "LLM": 2, "大模型": 2, "聊天机器人": 2, "GPT": 4}},
-    {"name": "Claude", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "长文": 3, "分析": 2, "Claude": 4, "artifacts": 3}},
-    {"name": "Cursor", "field": "AI coding", "keywords": {"AI编程": 4, "代码生成": 3, "Copilot": 2, "编辑器": 2, "IDE": 2, "自动补全": 2}},
+    {"name": "ChatGPT", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "LLM": 2, "大模型": 2, "聊天机器人": 2, "GPT": 4, "chatbot": 2, "large language model": 2, "conversation": 2}},
+    {"name": "Claude", "field": "AI chat", "keywords": {"AI": 1, "对话": 2, "长文": 3, "分析": 2, "Claude": 4, "artifacts": 3, "long context": 3, "analysis": 2}},
+    {"name": "Cursor", "field": "AI coding", "keywords": {"AI编程": 4, "代码生成": 3, "Copilot": 2, "编辑器": 2, "IDE": 2, "自动补全": 2, "AI coding": 4, "code generation": 3, "editor": 2, "autocomplete": 2}},
     # E-commerce / life
-    {"name": "小红书", "field": "social/lifestyle", "keywords": {"种草": 4, "笔记": 1, "生活方式": 3, "评测": 2, "分享": 1, "社区": 2}},
-    {"name": "拼多多", "field": "e-commerce", "keywords": {"拼团": 4, "低价": 2, "社交电商": 3, "砍价": 3, "百亿补贴": 3}},
-    {"name": "抖音/TikTok", "field": "short video", "keywords": {"短视频": 3, "直播": 2, "算法推荐": 3, "内容": 1, "feed": 2, "带货": 2}},
+    {"name": "小红书", "field": "social/lifestyle", "keywords": {"种草": 4, "笔记": 1, "生活方式": 3, "评测": 2, "分享": 1, "社区": 2, "lifestyle": 3, "review": 2, "community": 2, "recommendation": 3}},
+    {"name": "拼多多", "field": "e-commerce", "keywords": {"拼团": 4, "低价": 2, "社交电商": 3, "砍价": 3, "百亿补贴": 3, "group buy": 4, "discount": 2, "social commerce": 3}},
+    {"name": "抖音/TikTok", "field": "short video", "keywords": {"短视频": 3, "直播": 2, "算法推荐": 3, "内容": 1, "feed": 2, "带货": 2, "short video": 3, "livestream": 2, "algorithm": 3, "content": 1, "e-commerce live": 2}},
     # Hard to distinguish by simple keywords — keep for reference only
-    {"name": "Photoshop", "field": "image editing", "keywords": {"修图": 3, "PS": 4, "图像处理": 2, "滤镜": 2, "图层": 3, "蒙版": 3}},
-    {"name": "GitHub", "field": "code hosting", "keywords": {"代码": 1, "版本控制": 3, "开源": 3, "PR": 3, "issue": 2, "仓库": 2}},
+    {"name": "Photoshop", "field": "image editing", "keywords": {"修图": 3, "PS": 4, "图像处理": 2, "滤镜": 2, "图层": 3, "蒙版": 3, "image editing": 2, "filter": 2, "layer": 3, "mask": 3}},
+    {"name": "GitHub", "field": "code hosting", "keywords": {"代码": 1, "版本控制": 3, "开源": 3, "PR": 3, "issue": 2, "仓库": 2, "code": 1, "version control": 3, "open source": 3, "repository": 2}},
 ]
 
 # Jargon / buzzword blacklist (layer 5)
-# Can be customized by editing inspiration/data/defaults.json
+# Can be customized by editing agent_spark/data/defaults.json
 BUZZWORD_BLACKLIST: list[str] = _CONFIG.get("buzzwords") or [
-    "智能", "AI", "互联网+", "数字化", "云端", "大数据",
+    "互联网+", "数字化", "云端", "大数据",
     "区块链", "元宇宙", "赋能", "生态", "闭环", "抓手",
     "打通", "对齐", "颗粒度", "底层逻辑", "降维打击",
     "颠覆", "重构", "重塑",
+]
+
+BUZZWORD_COMMON: list[str] = _CONFIG.get("buzzwords_common") or [
+    "智能", "AI",
 ]
 
 # Trivial idea patterns (layer 5)
@@ -98,9 +99,11 @@ TRIVIAL_PATTERNS: list[re.Pattern] = [
 ]
 
 # ─────────────────────────────────────────────────────────
-# LAYER 1: Fact Validation (fixed: real evidence, not char count)
-# LAYER 1: Fact Validation (real evidence, not word-count)
+# LAYER 1: Fact Validation
 # ─────────────────────────────────────────────────────────
+
+def _bigrams(s: str) -> set[str]:
+    return {s[i:i+2] for i in range(len(s)-1)}
 
 def layer1_fact_check(
     idea: Idea,
@@ -136,10 +139,8 @@ def layer1_fact_check(
             pain_matched = True
             break
         # Strategy B: character bigram overlap for Chinese
-        def bigrams(s: str) -> set[str]:
-            return {s[i:i+2] for i in range(len(s)-1)}
-        pain_bigrams = bigrams(up_clean)
-        solved_bigrams = bigrams(pain_solved.lower())
+        pain_bigrams = _bigrams(up_clean)
+        solved_bigrams = _bigrams(pain_solved.lower())
         if len(pain_bigrams) > 0 and len(solved_bigrams) > 0:
             overlap = len(pain_bigrams & solved_bigrams)
             ratio = overlap / max(len(pain_bigrams), 1)
@@ -182,8 +183,7 @@ def layer1_fact_check(
 
 
 # ─────────────────────────────────────────────────────────
-# LAYER 2: Logic Validation (fixed: removed len<20 trap)
-# LAYER 2: Logic Validation (no len<20 trap)
+# LAYER 2: Logic Validation
 # ─────────────────────────────────────────────────────────
 
 def layer2_logic_check(idea: Idea) -> tuple[bool, str]:
@@ -237,12 +237,11 @@ def layer2_logic_check(idea: Idea) -> tuple[bool, str]:
 
 
 # ─────────────────────────────────────────────────────────
-# LAYER 3: Feasibility Validation (fixed: weighted scoring)
-# LAYER 3: Feasibility (weighted scoring, no hard-keyword kill)
+# LAYER 3: Feasibility Validation
 # ─────────────────────────────────────────────────────────
 
 # Feasibility weights — each signal has a weight; sum > threshold = fail
-# Can be customized by editing inspiration/data/defaults.json
+# Can be customized by editing agent_spark/data/defaults.json
 _CONFIG_FS = _CONFIG.get("feasibility_signals")
 if _CONFIG_FS and isinstance(_CONFIG_FS, list):
     FEASIBILITY_SIGNALS: list[tuple[re.Pattern, float, str]] = [
@@ -298,8 +297,7 @@ def layer3_feasibility_check(idea: Idea) -> tuple[bool, str]:
 
 
 # ─────────────────────────────────────────────────────────
-# LAYER 4: Market Duplicate Check (fixed: token-scored)
-# LAYER 4: Market Duplicate (token-weighted scoring)
+# LAYER 4: Market Duplicate Check
 # ─────────────────────────────────────────────────────────
 
 def layer4_market_repeat_check(idea: Idea) -> tuple[bool, str]:
@@ -327,7 +325,7 @@ def layer4_market_repeat_check(idea: Idea) -> tuple[bool, str]:
         if score > best_match[2]:
             best_match = (product["name"], product["field"], score)
 
-        # threshold configurable via inspiration/data/defaults.json
+        # threshold configurable via agent_spark/data/defaults.json
         if score >= MATURE_DUPLICATE_THRESHOLD:
             return False, (
                 f"[FAIL:L4] Highly duplicates '{product['name']}' ({product['field']})"
@@ -339,7 +337,6 @@ def layer4_market_repeat_check(idea: Idea) -> tuple[bool, str]:
 
 # ─────────────────────────────────────────────────────────
 # LAYER 5: Value Validation
-# LAYER 5: Value Validation
 # ─────────────────────────────────────────────────────────
 
 def layer5_value_check(idea: Idea) -> tuple[bool, str]:
@@ -349,10 +346,15 @@ def layer5_value_check(idea: Idea) -> tuple[bool, str]:
         str(idea.get(k, "")) for k in ["title", "one_line", "core_value", "target_user"]
     ]).lower()
 
-    # 1) Buzzword density
+    # 1) Buzzword density — two tiers
     buzzword_hits = [w for w in BUZZWORD_BLACKLIST if w.lower() in all_text]
+    common_hits = [w for w in BUZZWORD_COMMON if w.lower() in all_text]
+    # Strong buzzwords (赋能, 生态, 闭环...) — 3+ triggers fail
     if len(buzzword_hits) >= 3:
         return False, f"[FAIL:L5] Buzzword overload: {len(buzzword_hits)} buzzwords ({', '.join(buzzword_hits[:4])})"
+    # Common words (智能, AI) — only fail when combined with 2+ strong buzzwords, and at least 2 common words
+    if len(common_hits) >= 2 and len(buzzword_hits) >= 2:
+        return False, f"[FAIL:L5] Buzzword overload: common ({', '.join(common_hits)}) + strong ({', '.join(buzzword_hits[:3])})"
 
     # 2) Trivial patterns
     for pat in TRIVIAL_PATTERNS:
@@ -383,7 +385,6 @@ def layer5_value_check(idea: Idea) -> tuple[bool, str]:
 
 # ─────────────────────────────────────────────────────────
 # MAIN FILTER ORCHESTRATOR
-# 主过滤编排器
 # ─────────────────────────────────────────────────────────
 
 def five_layer_filter(
@@ -409,19 +410,18 @@ def five_layer_filter(
     # ── Locale auto-detect ──
     if locale is None:
         locale = "zh" if any("\u4e00" <= c <= "\u9fff" for text in pain + evidence for c in text) else "en"
-    _ = lambda en, zh: zh if locale == "zh" else en
+    _t = lambda en, zh: zh if locale == "zh" else en
 
     # ── Stats labels ──
-    L = lambda en, zh: zh if locale == "zh" else en
     labels = {
-        "total": _("Total", "总创意"),
-        "fact": _("L1 Fact", "L1 事实"),
-        "logic": _("L2 Logic", "L2 逻辑"),
-        "feasibility": _("L3 Feasibility", "L3 落地性"),
-        "market": _("L4 Market", "L4 市场"),
-        "value": _("L5 Value", "L5 价值"),
-        "passed": _("Passed", "通过"),
-        "pass_rate": _("Pass rate", "通过率"),
+        "total": _t("Total", "总创意"),
+        "fact": _t("L1 Fact", "L1 事实"),
+        "logic": _t("L2 Logic", "L2 逻辑"),
+        "feasibility": _t("L3 Feasibility", "L3 落地性"),
+        "market": _t("L4 Market", "L4 市场"),
+        "value": _t("L5 Value", "L5 价值"),
+        "passed": _t("Passed", "通过"),
+        "pass_rate": _t("Pass rate", "通过率"),
     }
 
     passed: list[dict[str, Any]] = []
@@ -496,24 +496,23 @@ def five_layer_filter(
 
     if verbose:
         print(f"\n{'='*55}")
-        print(f"  📊 {_('Layer Filter Stats', '五层过滤统计')}")
+        print(f"  📊 {_t('Layer Filter Stats', '五层过滤统计')}")
         print(f"{'='*55}")
-        print(f"  {_('Total', '总创意')}:     {stats['total']}")
-        print(f"  {_('L1 Fact', 'L1 事实')}:     ✗ {stats['L1_fact']}")
-        print(f"  {_('L2 Logic', 'L2 逻辑')}:    ✗ {stats['L2_logic']}")
-        print(f"  {_('L3 Feasibility', 'L3 落地性')}:     ✗ {stats['L3_feasibility']}")
-        print(f"  {_('L4 Market', 'L4 市场')}:   ✗ {stats['L4_market']}")
-        print(f"  {_('L5 Value', 'L5 价值')}:    ✗ {stats['L5_value']}")
+        print(f"  {_t('Total', '总创意')}:     {stats['total']}")
+        print(f"  {_t('L1 Fact', 'L1 事实')}:     ✗ {stats['L1_fact']}")
+        print(f"  {_t('L2 Logic', 'L2 逻辑')}:    ✗ {stats['L2_logic']}")
+        print(f"  {_t('L3 Feasibility', 'L3 落地性')}:     ✗ {stats['L3_feasibility']}")
+        print(f"  {_t('L4 Market', 'L4 市场')}:   ✗ {stats['L4_market']}")
+        print(f"  {_t('L5 Value', 'L5 价值')}:    ✗ {stats['L5_value']}")
         print(f"  {'─'*45}")
-        print(f"  ✅ {_('Passed', '通过')}:   {stats['passed']}/{stats['total']}")
-        print(f"     {_('Pass rate', '通过率')}: {stats['passed']/max(stats['total'],1)*100:.1f}%")
+        print(f"  ✅ {_t('Passed', '通过')}:   {stats['passed']}/{stats['total']}")
+        print(f"     {_t('Pass rate', '通过率')}: {stats['passed']/max(stats['total'],1)*100:.1f}%")
 
     return passed
 
 
 # ─────────────────────────────────────────────────────────
-# CLI ENTRY (fixed: error handling, encoding, JSONL)
-# CLI ENTRY (error handling, encoding, JSONL)
+# CLI ENTRY
 # ─────────────────────────────────────────────────────────
 
 def main():
@@ -577,7 +576,7 @@ def main():
     output = {
         "total": len(ideas),
         "passed": len(results),
-        "passed_ideas": [r["idea"] for r in results],
+        "passed_ideas": [ideas[r["index"]] for r in results],
         "full_reports": results,
     }
     print(json.dumps(output, ensure_ascii=False, indent=2))
