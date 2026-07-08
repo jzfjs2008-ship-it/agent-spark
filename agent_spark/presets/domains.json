@@ -1,0 +1,362 @@
+[
+  {
+    "domain": "pet supplies",
+    "domain_zh": "宠物用品",
+    "pain_points": [
+      "Automatic feeders jam frequently due to moisture-clumped kibble",
+      "Litter tracking all over the house despite mats",
+      "Pet sitters are hard to trust and expensive",
+      "Multi-cat households can't control individual diets",
+      "Pet cameras have poor night vision and connectivity drops",
+      "Self-cleaning litter boxes break down after 6 months",
+      "No good solution for timed feeding of wet food"
+    ],
+    "evidence": [
+      "Amazon PetSafe feeder reviews: 'jams every 3 days' is top 1-star complaint",
+      "Reddit r/cats: weekly threads about litter robot failures after 6 months",
+      "Nextdoor pet-sitting requests growing 40% YoY; trust is #1 concern"
+    ]
+  },
+  {
+    "domain": "home organization",
+    "domain_zh": "家居收纳",
+    "pain_points": [
+      "Fixed-size shelves never fit rental apartment cabinets",
+      "Drawers become chaotic without dividers",
+      "Moving is expensive because furniture isn't modular",
+      "Small kitchens lack storage for modern appliances",
+      "Seasonal items take up prime closet space year-round",
+      "No good vertical storage solution for oddly-shaped items",
+      "Labeling systems fail because family members don't maintain them"
+    ],
+    "evidence": [
+      "IKEA hack communities have 2M+ members — evidence of massive unmet need for flexible furniture",
+      "Marie Kondo method spawned an industry but solving 'maintenance' is unsolved",
+      "Reddit r/declutter: 'organized last month, already a mess again' is a recurring post type"
+    ]
+  },
+  {
+    "domain": "remote work tools",
+    "domain_zh": "远程办公工具",
+    "pain_points": [
+      "Too many communication tools (Slack, Teams, Discord) — context fragmentation",
+      "Async communication lacks emotional nuance, leads to misunderstandings",
+      "Meeting fatigue: 4 hours of video calls = 0 hours of deep work",
+      "Time zone coordination is a scheduling nightmare",
+      "Home office ergonomics are DIY and cause physical pain",
+      "No good digital whiteboard that actually works across platforms",
+      "Water-cooler moments don't happen organically in remote teams"
+    ],
+    "evidence": [
+      "Microsoft Work Trend Index: 57% of remote workers spend more time communicating than creating",
+      "Slack's own data shows average user spends 2.5hr/day in DMs and channels",
+      "Harvard Business Review: remote teams have 15% lower innovation output due to lack of informal collisions"
+    ]
+  },
+  {
+    "domain": "personal knowledge management",
+    "domain_zh": "个人知识管理",
+    "pain_points": [
+      "Notes are scattered across Notion, Obsidian, Apple Notes — no unified search",
+      "Capturing an idea takes too long (open app, find folder, type, tag)",
+      "Saved articles and bookmarks are never re-read",
+      "Tagging systems break down after 500+ notes",
+      "No good way to connect ideas across different projects",
+      "Highlighter in Kindle vs Readwise vs browser — highlights are fragmented",
+      "Maintaining a second brain feels like a second job"
+    ],
+    "evidence": [
+      "Obsidian 60k+ GitHub stars shows massive demand; plugin fragmentation shows unsolved pain",
+      "Readwise has 500k+ users paying $8/mo just to consolidate highlights — there's a market",
+      "Tiago Forte's 'Building a Second Brain' sold 500k+ copies, yet most readers still struggle with maintenance"
+    ]
+  },
+  {
+    "domain": "health & fitness",
+    "domain_zh": "健康健身",
+    "pain_points": [
+      "Gym membership is expensive and underutilized",
+      "Home workout equipment takes up too much space",
+      "No good way to track form during solo workouts",
+      "Diet tracking apps are tedious (weigh, log, calculate) every single meal",
+      "Injury recovery is slow without professional guidance",
+      "Sleep tracking wearables give data but no actionable improvements",
+      "Motivation crashes after 3 weeks — habit formation fails repeatedly"
+    ],
+    "evidence": [
+      "New Year's resolution stats: 80% fail by February",
+      "MyFitnessPal has 200M+ downloads yet average retention is <30 days",
+      "Peloton's boom-and-bust cycle shows demand for at-home fitness but price/cost is a barrier"
+    ]
+  },
+  {
+    "domain": "cooking & meal prep",
+    "domain_zh": "烹饪备餐",
+    "pain_points": [
+      "Meal planning takes 2 hours every Sunday — nobody has that time",
+      "Recipe sites have 3000 words of SEO fluff before the actual ingredients",
+      "Leftovers go bad because nobody remembers what's in the fridge",
+      "Grocery delivery orders are inefficient without meal-plan integration",
+      "Dietary restrictions make cooking for a group nearly impossible",
+      "Kitchen gadgets that solve one problem and create five storage problems",
+      "Cooking for one is disproportionately expensive and wasteful"
+    ],
+    "evidence": [
+      "NYT Cooking has 1M+ subscribers — people will pay for recipe solutions",
+      "Food waste statistics: 30-40% of food supply in US is wasted, household is #1 contributor",
+      "HelloFresh had $2B revenue in 2023 — demand for meal solutions is validated"
+    ]
+  },
+  {
+    "domain": "gardening",
+    "domain_zh": "园艺",
+    "pain_points": [
+      "Plants die from inconsistent watering (too much or too little)",
+      "Small-space gardening (balcony/windowsill) has limited guides",
+      "Pest identification requires expertise most beginners lack",
+      "Seasoning planning is confusing — when to plant what where",
+      "Soil quality is invisible until the plant suffers",
+      "Overwhelming choice of seeds/plants at nurseries with little guidance",
+      "Garden produce ripens all at once and goes to waste"
+    ],
+    "evidence": [
+      "Gardening subreddits have 5M+ members, 'what's wrong with my plant' is daily top post",
+      "Plant parent trend exploded during pandemic — indoor plant care is a $15B market",
+      "Click & Grow (smart indoor garden) raised $5M+ on crowdfunding — demand for tech-enabled gardening"
+    ]
+  },
+  {
+    "domain": "parenting",
+    "domain_zh": "育儿",
+    "pain_points": [
+      "Contradictory advice from pediatrician, parents, and internet",
+      "Baby sleep is the #1 cause of parental exhaustion — no universal solution",
+      "Screen time guilt with no good alternative activities",
+      "Finding age-appropriate activities requires daily research",
+      "Meal planning for picky toddlers is soul-crushing",
+      "Postpartum support is fragmented and hard to access",
+      "No unified record of vaccinations, milestones, and medical history"
+    ],
+    "evidence": [
+      "BabyCenter app has 40M+ users — evidence that parents seek guidance tools",
+      "What to Expect When You're Expecting has sold 20M+ copies — massive demand for parenting knowledge",
+      "NIH study: 1 in 5 new parents report clinically significant stress from information overload"
+    ]
+  },
+  {
+    "domain": "travel",
+    "domain_zh": "旅行",
+    "pain_points": [
+      "Trip planning across flights, hotels, activities requires 8+ browser tabs",
+      "Itinerary management is chaotic — confirmations in 5 different inboxes",
+      "Hidden fees (resort fees, bag fees, booking fees) inflate costs 30%+",
+      "Restaurant recommendations are either tourist traps or require deep local knowledge",
+      "Language barriers make simple tasks (ordering food, asking directions) stressful",
+      "Packing for varying weather/climate in one suitcase is a puzzle",
+      "Post-trip photo organization never happens — 2000 photos stay on the phone"
+    ],
+    "evidence": [
+      "TripIt has 20M+ downloads — itinerary consolidation is a validated need",
+      "Google Flights processes billions of searches — flight search pain is universal",
+      "Airbnb's $113B valuation proves demand for alternative travel but hosts/guests both have complaints"
+    ]
+  },
+  {
+    "domain": "language learning",
+    "domain_zh": "语言学习",
+    "pain_points": [
+      "Duolingo-style gamification teaches words, not conversation",
+      "No good way to practice speaking with a native speaker affordably",
+      "Grammar rules are taught in isolation, impossible to apply in real-time",
+      "Learning plateaus after 3 months — intermediate is the hardest stage",
+      "Flashcard reviews pile up when you skip a day (200+ cards due)",
+      "No integration between learning tools and real content (news, shows)",
+      "Multiple scripts (Chinese, Arabic) require months just to read, not speak"
+    ],
+    "evidence": [
+      "Duolingo has 500M+ downloads but <5% reach conversational fluency",
+      "iTalki connects 10M+ students with tutors — demand for human interaction is validated",
+      "Language learning market is $60B+; most products solve 'starting' not 'finishing'"
+    ]
+  },
+  {
+    "domain": "personal finance",
+    "domain_zh": "个人理财",
+    "pain_points": [
+      "Budgeting apps track spending but don't prevent overspending",
+      "Investing feels inaccessible — jargon, minimums, fear of mistakes",
+      "Subscription creep: $9.99 charges add up to $200+/month unnoticed",
+      "Tax optimization requires an accountant for anything beyond W-2",
+      "No good way to visualize long-term financial scenarios",
+      "Credit card rewards optimization requires spreadsheets and spreadsheets",
+      "Financial advice is contradictory — Dave Ramsey vs. r/personalfinance vs. your uncle"
+    ],
+    "evidence": [
+      "Mint had 25M+ users before Intuit shut it down — demand for PF tools is enormous",
+      "r/personalfinance has 19M subscribers — people are actively seeking guidance",
+      "Robinhood's 23M users show demand for accessible investing, but gamification has real costs"
+    ]
+  },
+  {
+    "domain": "productivity",
+    "domain_zh": "效率工具",
+    "pain_points": [
+      "Task switching between tools destroys focus (email, Slack, linear, notion)",
+      "GTD and productivity systems work for 2 weeks then collapse",
+      "Inbox zero is a Sisyphean task — new emails arrive faster than you reply",
+      "Meeting culture: 30-min meetings waste 25 min of preamble",
+      "Prioritization is impossible when everything feels urgent",
+      "No good integration between personal and work task lists",
+      "Pomodoro technique works but stopping mid-flow is painful"
+    ],
+    "evidence": [
+      "Todoist has 40M+ users — task management demand is validated but satisfaction is low",
+      "Microsoft Viva Insights: average knowledge worker spends 60% of time on communication, not creation",
+      "Cal Newport's 'Deep Work' sold 2M+ copies — people are desperate for focus solutions"
+    ]
+  },
+  {
+    "domain": "content creation",
+    "domain_zh": "内容创作",
+    "pain_points": [
+      "Consistent posting schedule is impossible to maintain solo",
+      "Growing an audience from zero feels hopeless — algorithm is opaque",
+      "Content repurposing across platforms requires reformatting everything",
+      "Creative burnout cycles: 3 weeks inspired, 2 months blocked",
+      "Engagement metrics (likes, shares) don't correlate with real impact",
+      "Plagiarism and content theft with no easy takedown process",
+      "Monetization is unreliable — platform policy changes can wipe income overnight"
+    ],
+    "evidence": [
+      "Substack has 35M+ monthly active readers — creator economy is real but creator tools are lacking",
+      "Buffer's State of Social report: 73% of creators say consistency is their biggest challenge",
+      "YouTube demonetization policy changes regularly devastate creator income — single-platform risk is real"
+    ]
+  },
+  {
+    "domain": "job searching",
+    "domain_zh": "求职",
+    "pain_points": [
+      "Tailoring resume and cover letter for each application takes 2+ hours",
+      "LinkedIn Easy Apply gets 200+ applicants in the first hour — zero signal",
+      "Interview processes take 5-7 rounds over 6 weeks — exhausting",
+      "Salary negotiation is opaque and biased toward those who know the game",
+      "Ghost jobs (posted but not actively hiring) waste enormous time",
+      "Skills assessment tests are generic and don't reflect real work",
+      "Networking feels transactional and awkward for introverts"
+    ],
+    "evidence": [
+      "LinkedIn data: 85% of jobs are filled through networking — yet networking tools are primitive",
+      "Indeed processes 3B+ job searches/month — scale of demand is massive",
+      "Glassdoor's anonymous salary data has been essential but only covers ~50% of roles"
+    ]
+  },
+  {
+    "domain": "e-commerce",
+    "domain_zh": "电商",
+    "pain_points": [
+      "Returning online purchases is inconvenient — print label, pack, drop off",
+      "Sizing inconsistency across brands means ordering 2-3 sizes and returning most",
+      "Review authenticity is impossible to verify — fake reviews are everywhere",
+      "Product discovery via search is terrible for subjective purchases (clothes, decor)",
+      "Abandoned cart recovery emails are ignored — they're too little too late",
+      "Cross-border shopping: unexpected duties, shipping costs, and return hassle",
+      "Subscription boxes accumulate clutter — unboxing joy wears off after month 2"
+    ],
+    "evidence": [
+      "Statista: 30% of all online purchases are returned (vs 9% in-store)",
+      "Fake review detection companies like Fakespot were acquired for $200M — it's a real crisis",
+      "Amazon has 350M+ products — discovery is broken, not fixed by search"
+    ]
+  },
+  {
+    "domain": "education",
+    "domain_zh": "教育",
+    "pain_points": [
+      "Lecture format assumes all students learn at same pace — they don't",
+      "Homework feedback arrives 2 weeks later, when the lesson is forgotten",
+      "Standardized tests measure test-taking ability, not understanding",
+      "Attention spans in digital-native students are 60 seconds, not 50 minutes",
+      "Teachers spend 40% of time on admin, not teaching",
+      "Online courses have <10% completion rates — motivation is the real problem",
+      "Skill obsolescence: what you learn in year 1 is outdated by year 4"
+    ],
+    "evidence": [
+      "Coursera: only 9% of enrolled learners complete courses — completion is the unsolved problem",
+      "Khan Academy's 150M+ users show demand for self-paced learning, but it supplements, doesn't replace",
+      "Teacher burnout is at an all-time high — 55% considering leaving the profession (NEA 2023)"
+    ]
+  },
+  {
+    "domain": "mental health",
+    "domain_zh": "心理健康",
+    "pain_points": [
+      "Therapist access has 3-month waitlists and costs $150-250/session",
+      "Medication management (antidepressants, ADHD meds) requires monthly refill appointments",
+      "Crisis support is text-based (988) but follow-up care doesn't exist",
+      "Wellness apps sell 'self-care' but depression isn't fixed by bubble baths",
+      "Support groups exist but finding the right one is trial and error",
+      "Employer EAP programs are underutilized and often have 5-session caps",
+      "Mental health tracking (mood, sleep, triggers) is therapy homework nobody does consistently"
+    ],
+    "evidence": [
+      "Mental health apps raised $5B+ in VC funding in 2021-2023 but clinical outcomes are mixed",
+      "Talkspace and BetterHelp have 3M+ users — demand for accessible therapy is validated",
+      "WHO: depression affects 5% of adults globally, anxiety affects 4% — 300M+ potential users"
+    ]
+  },
+  {
+    "domain": "smart home",
+    "domain_zh": "智能家居",
+    "pain_points": [
+      "Devices from different brands don't talk to each other (Matter is still messy)",
+      "Setup requires technical skills most homeowners don't have",
+      "Smart home 'automations' are conditional logic, not actually intelligent",
+      "Privacy concerns: always-on microphones in the home feel invasive",
+      "WiFi-dependent devices fail when internet goes down",
+      "App proliferation: one app per device = 8 apps for a fully smart home",
+      "Obsolescence: 'smart' refrigerator's touchscreen is painfully slow after 2 years"
+    ],
+    "evidence": [
+      "Thread/Matter protocol was supposed to unify smart home but adoption has been slow (2 years, still early)",
+      "Consumer Reports: 40% of smart home device owners say reliability is their biggest frustration",
+      "Amazon's Alexa business lost $10B+ in 2022 — smart home has engagement problems, not just technology"
+    ]
+  },
+  {
+    "domain": "open source tools",
+    "domain_zh": "开源工具",
+    "pain_points": [
+      "Maintainer burnout is the #1 reason good projects die",
+      "Documentation is almost always outdated or incomplete",
+      "Dependency hell: updating one package breaks five others",
+      "Security vulnerabilities in transitive dependencies go unnoticed for months",
+      "Onboarding contributors requires more effort than writing the code yourself",
+      "Funding for open source is donation-based and unreliable",
+      "CLI tools are powerful but have steep learning curves"
+    ],
+    "evidence": [
+      "Log4j vulnerability (CVSS 10.0) showed how one unpaid maintainer affects the entire internet",
+      "GitHub Octoverse: 100M+ developers on the platform but 90%+ of code is written by 5% of contributors",
+      "Open Source Security Foundation (OpenSSF) was created specifically to address OSS supply chain risks"
+    ]
+  },
+  {
+    "domain": "AI tools",
+    "domain_zh": "AI工具",
+    "pain_points": [
+      "AI outputs look confident but are frequently wrong — verification is hard",
+      "Prompt engineering is trial-and-error with no systematic methodology",
+      "AI tools are siloed — ChatGPT, Claude, Gemini each have different strengths",
+      "Context windows fill up quickly and the model 'forgets' what was discussed",
+      "Custom GPTs/assistants sound impressive but rarely deliver production quality",
+      "API costs scale unpredictably — a demo costs $2, production costs $2000",
+      "Regulatory uncertainty makes companies hesitate to integrate AI into products"
+    ],
+    "evidence": [
+      "Vercel AI SDK has 100k+ GitHub stars — developers are building with AI but tools are still primitive",
+      "Prompt management startups (LangSmith, Weights & Biases Prompts) are raising huge rounds — the problem is real",
+      "AI hallucination rates on factual queries are 15-27% depending on model (Vectara HHEM)"
+    ]
+  }
+]
