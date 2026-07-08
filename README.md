@@ -44,6 +44,11 @@
 
 Agent Spark is a **Python skill for AI Agents** — a structured creative-idea pipeline that fits inside any Agent's tool belt:
 
+- **20 preset domains** with pre-scanned pain points — say "pet supplies", get 7 real pains
+- **Zero external dependencies** — just Python 3.10+
+- **Bilingual auto-detect** — English or Chinese input, both work
+- **Optional REST API** — `pip install agent-spark[api]`
+
 ```
 Agent interacts with user (5 rounds + intent anchor)
     ↓
@@ -123,7 +128,33 @@ agent-spark-pipeline                             # run the full interview pipeli
 
 ---
 
-## 🏗️ Pipeline
+## 🚀 Quick Start
+
+**30 seconds — no API key, no internet:**
+
+```python
+from agent_spark import find_domain, Filter
+
+# Find a preset domain with pre-scanned pain points
+d = find_domain("pet supplies")
+print(f"{d.domain}: {len(d.pain_points)} pain points")
+
+# Run the 5-layer filter
+result = Filter.run(d.ideas, d.pain_points, d.evidence)
+print(f"Passed: {len(result)}/{len(d.ideas)}")
+```
+
+**Or via CLI:**
+```bash
+pip install agent-spark
+agent-spark-demo
+agent-spark-pipeline
+echo '{"ideas": [...]}' | agent-spark-filter
+```
+
+---
+
+## 🏗️ Advanced Usage
 
 ### Step 1 · 5-Round Agent Interview + Intent Anchor
 
