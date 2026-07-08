@@ -47,7 +47,7 @@ Agent Spark is a **Python skill for AI Agents** — a structured creative-idea p
 - **20 preset domains** with pre-scanned pain points — say "pet supplies", get 7 real pains
 - **Zero external dependencies** — just Python 3.10+
 - **Bilingual auto-detect** — English or Chinese input, both work
-- **Optional REST API** — `pip install agent-spark[api]`
+- **Optional REST API** — `pip install agent-spark[api]` (see Install section below)
 
 ```
 Agent interacts with user (5 rounds + intent anchor)
@@ -111,7 +111,11 @@ passed = five_layer_filter(
 ### As a CLI tool
 
 ```bash
-pip install agent-spark
+# Install from GitHub (PyPI publishing is deferred — see FAQ below)
+pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
+
+# Optional extras
+pip install "agent-spark[api] @ git+https://github.com/jzfjs2008-ship-it/agent-spark.git"  # REST API
 echo '{"ideas": [...]}' | agent-spark-filter    # filter ideas
 cat plan.md | agent-spark-audit                  # audit a project plan
 agent-spark-demo                                 # see it in action
@@ -146,7 +150,11 @@ print(f"Passed: {len(result)}/{len(d.ideas)}")
 
 **Or via CLI:**
 ```bash
-pip install agent-spark
+# Install from GitHub (PyPI publishing is deferred — see FAQ below)
+pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
+
+# Optional extras
+pip install "agent-spark[api] @ git+https://github.com/jzfjs2008-ship-it/agent-spark.git"  # REST API
 agent-spark-demo
 agent-spark-pipeline
 echo '{"ideas": [...]}' | agent-spark-filter
@@ -215,7 +223,11 @@ Audit (New in v0.99) checks for logic, structure, entity, and technical errors.
 ## 📦 Install
 
 ```bash
-pip install agent-spark
+# Install from GitHub (PyPI publishing is deferred — see FAQ below)
+pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
+
+# Optional extras
+pip install "agent-spark[api] @ git+https://github.com/jzfjs2008-ship-it/agent-spark.git"  # REST API
 ```
 
 Or from source:
@@ -277,6 +289,18 @@ Ideas for contributions:
 ## 📜 License
 
 MIT © [Nous Research](https://nousresearch.com).
+
+---
+
+## ❓ FAQ
+
+**Q: Why isn't this on PyPI?**
+
+A: The project is iterating fast (9 commits on day 1). Publishing to PyPI would require bumping the version and running `build + twine upload` on every change. `pip install git+https://...` is standard for early-stage projects — it always grabs the latest code. We'll publish to PyPI when the API stabilizes.
+
+**Q: Does it work offline?**
+
+A: Yes. Zero external dependencies. The filter engine and audit are pure Python stdlib.
 
 ---
 
