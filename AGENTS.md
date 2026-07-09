@@ -16,8 +16,12 @@ result = Filter.run(domain.ideas, domain.pain_points, domain.evidence)
 ### `find_domain(query: str) -> DomainPreset | None`
 Match a preset domain by name or fragment.
 
-### `Filter.run(ideas, pain_points, evidence, locale=None) -> list[dict]`
-Run the 5-layer convergence filter.
+### `generate_ideas(domain, pain_points=None, llm=None, ...) -> list[dict]`
+Generate ideas via LLM, then run the 5-layer filter.
+
+- Pass a custom `llm(prompt, system, model) -> str` callable
+- Or set `OPENAI_API_KEY` env var for auto HTTP client
+- `filter_results=True` runs the 5-layer filter on generated ideas
 
 ### `list_domains() -> list[str]`
 Return all 20 preset domain names.
