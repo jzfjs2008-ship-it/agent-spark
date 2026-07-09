@@ -41,6 +41,7 @@ agent-spark-demo-full = "agent_spark.demo_full:main"
 agent-spark-filter = "agent_spark.filter.five_layer_filter:main"
 agent-spark-audit = "agent_spark.audit.auditor:main"
 agent-spark-pipeline = "agent_spark.pipeline:main"
+agent-spark-presets = "agent_spark.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["agent_spark", "agent_spark.*"]
