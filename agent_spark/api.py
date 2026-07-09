@@ -45,7 +45,7 @@ def _get_app():
     app = FastAPI(
         title="Agent Spark · Filter API",
         description="Industrial-grade creative idea filter. POST ideas, GET back pass/fail per layer.",
-        version="0.99.0",
+        version="0.9.0-beta",
     )
 
     class FilterRequest(BaseModel):

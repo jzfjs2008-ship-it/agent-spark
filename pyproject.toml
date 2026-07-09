@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-spark"
-version = "0.99.0"
-description = "AI Agent creative idea pipeline — mine real needs, diverge with AI across 6 dimensions, converge with a 5-layer quality filter. Zero deps, pip install."
+version = "0.9.0-beta"
+description = "Offline creative idea convergence engine for Hermes/Claude Code/Codex CLI/OpenClaw. Built-in 20-domain pain-point knowledge base + 5-layer local rule filter — no LLM chain required. Dual mode: pure offline / LLM-enhanced."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
