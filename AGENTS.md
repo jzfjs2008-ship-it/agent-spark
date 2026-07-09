@@ -3,6 +3,8 @@
 This file is recognized by **Claude Code**, **Codex CLI**, and compatible AI coding agents.
 It describes the `agent-spark` project: an Agent-native creative idea engine.
 
+[中文文档 → README_zh.md](README_zh.md)
+
 ## Quick Start
 
 ```python

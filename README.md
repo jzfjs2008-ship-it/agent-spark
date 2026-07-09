@@ -12,6 +12,9 @@
     </a>
     <img src="https://img.shields.io/badge/domains-20-ff69b4" alt="20 domains">
     <img src="https://img.shields.io/badge/version-0.9.0--beta-yellow" alt="v0.9.0-beta">
+    <a href="README_zh.md">
+      <img src="https://img.shields.io/badge/中文文档-blueviolet" alt="中文文档">
+    </a>
   </p>
 
   <sub>
@@ -109,7 +112,7 @@ pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
 pip install "agent-spark[api] @ git+https://github.com/jzfjs2008-ship-it/agent-spark.git"
 ```
 
-Core filter engine: **zero third-party Python packages**. Stdlib only. bge-small-zh vector model and LLM client are optional add-ons.
+Core filter engine: **zero third-party Python packages**. Stdlib only. LLM client uses stdlib `urllib`. The optional REST API adds FastAPI + uvicorn + pydantic.
 
 ---
 
@@ -177,16 +180,17 @@ agent_spark/                  ← Python package
 ├── presets/                  ← 20 domain presets (community-extensible)
 ├── generator.py              ← LLM integration (optional)
 ├── locale.py                 ← Auto-detect EN/ZH
+├── cli.py                    ← CLI tool (list/show/add/import)
 └── api.py                    ← FastAPI REST API (optional)
 ```
 
 ## ❓ FAQ
 
-**Q: Is this the same as Apache Spark?**  
+**Q: Is this the same as Apache Spark?**
 A: No. Apache Spark is a big data engine. This is an offline creative idea engine for AI coding agents.
 
-**Q: Does it work offline?**  
+**Q: Does it work offline?**
 A: Yes. Pure offline mode needs zero API calls. LLM-enhanced mode is optional.
 
-**Q: What counts as "zero dependencies"?**  
+**Q: What counts as "zero dependencies"?**
 A: The core filter engine and audit module use only Python stdlib — no third-party packages required. The optional LLM client uses `urllib` (also stdlib). The optional REST API adds FastAPI + uvicorn + pydantic.
