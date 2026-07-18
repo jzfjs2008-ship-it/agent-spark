@@ -2,19 +2,14 @@
 """
 Agent Spark — Industrial creative-idea pipeline for AI Agents.
 
-Usage:
-    from agent_spark import find_domain, Filter, generate_ideas
+Primary entry:
+    from agent_spark import spark_ideate
+    results = spark_ideate("pet supplies", llm=my_fn)
 
-    # With presets (no LLM needed)
+Fallback (no LLM):
+    from agent_spark import find_domain, Filter
     d = find_domain("pet supplies")
     Filter.run(d.ideas, d.pain_points, d.evidence)
-
-    # With LLM (Agent passes its own callable)
-    my_llm = lambda prompt, system, model: "..."
-    ideas = generate_ideas("pet supplies", llm=my_llm)
-
-    # With env vars (OPENAI_API_KEY)
-    ideas = generate_ideas("pet supplies")
 """
 
 from __future__ import annotations
@@ -23,6 +18,9 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
+
+from agent_spark.spark_ideate import spark_ideate
+from agent_spark.generator import generate_ideas
 
 _PRESETS_PATH = Path(__file__).resolve().parent / "presets" / "domains.json"
 
@@ -62,26 +60,6 @@ class Filter:
     ) -> list[dict[str, Any]]:
         from agent_spark.filter.five_layer_filter import five_layer_filter
         return five_layer_filter(ideas, pain_points, evidence, locale=locale)
-
-
-def generate_ideas(
-    domain: str,
-    pain_points: list[str] | None = None,
-    llm: Callable[..., str] | None = None,
-    model: str | None = None,
-    api_key: str | None = None,
-    base_url: str | None = None,
-    filter_results: bool = True,
-    verbose: bool = True,
-    locale: str | None = None,
-) -> list[dict[str, Any]]:
-    """Generate creative ideas for a domain via LLM.
-    
-    See agent_spark/generator.py for full docs.
-    """
-    from agent_spark.generator import generate_ideas as _gen
-    return _gen(domain, pain_points, llm, model, api_key, base_url,
-                filter_results, verbose, locale)
 
 
 def _load_presets() -> list[DomainPreset]:

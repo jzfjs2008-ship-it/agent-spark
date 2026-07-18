@@ -1,32 +1,48 @@
 # Agent Spark — Agent Instructions
 
 This file is recognized by **Claude Code**, **Codex CLI**, and compatible AI coding agents.
-It describes the `agent-spark` project: an Agent-native creative idea engine.
+It describes the `agent-spark` project: an **LLM-powered idea engine** with local rule-based convergence.
 
 [中文文档 → README_zh.md](README_zh.md)
 
-## Quick Start
+---
+
+## ⚡ Single Call — The Only API You Need
 
 ```python
-from agent_spark import find_domain, Filter
-domain = find_domain("pet supplies")
-result = Filter.run(domain.ideas, domain.pain_points, domain.evidence)
+from agent_spark import spark_ideate
+
+results = spark_ideate(
+    domain="pet supplies",
+    llm=lambda prompt, system, model: my_llm_call(prompt, system),  # pass your LLM
+)
+
+for r in results:
+    print(f"{r['title']} — {r['one_line']}")
+    print(f"  Feasibility: {r['feasibility_score']}/5  Novelty: {r['novelty_score']}/5")
 ```
 
-## Core API
+**What happens inside one call:**
+1. Load pre-scanned pain points for the domain (from 20-domain preset library)
+2. Call your LLM with the diverge prompt template → 6+ creative ideas
+3. Run the 5-layer local filter (L1 fact / L2 logic / L3 feasibility / L4 market / L5 value)
+4. Return only passed ideas, with scores
 
-### `find_domain(query: str) -> DomainPreset | None`
-Match a preset domain by name or fragment.
+**No API key needed if you pass your own LLM callable.** Just set `OPENAI_API_KEY` for auto HTTP mode.
 
-### `generate_ideas(domain, pain_points=None, llm=None, ...) -> list[dict]`
-Generate ideas via LLM, then run the 5-layer filter.
+---
 
-- Pass a custom `llm(prompt, system, model) -> str` callable
-- Or set `OPENAI_API_KEY` env var for auto HTTP client
-- `filter_results=True` runs the 5-layer filter on generated ideas
+## Full API Reference
 
-### `list_domains() -> list[str]`
-Return all 20 preset domain names.
+| Function | Use Case |
+|----------|----------|
+| `spark_ideate(domain, llm=...)` | **Primary entry** — LLM diverge + local converge |
+| `generate_ideas(domain, llm=...)` | Lower-level, more control over intermediate steps |
+| `find_domain("pet supplies")` | Look up pre-scanned pain points |
+| `Filter.run(ideas, pain_points, evidence)` | Run filter manually on your own ideas |
+| `list_domains()` | List all 20 preset domain names |
+
+---
 
 ## REST API (optional)
 
@@ -35,23 +51,28 @@ pip install agent-spark[api]
 uvicorn agent_spark.api:get_app --port 8080
 ```
 
+Endpoints: `POST /filter` | `GET /domains` | `GET /health`
+
+---
+
 ## Locale
 
-All user-facing output auto-detects language from input.
-- Input contains Chinese characters → `locale="zh"`
-- Otherwise → `locale="en"`
+Auto-detects EN/ZH from input. Force with `locale="zh"` or `locale="en"`.
 
-Force: `Filter.run(ideas, pain_points, evidence, locale="zh")`
+---
 
 ## Architecture
 
 ```
-AGENTS.md ← this file (Claude Code + Codex + compatible agents)
-├── integrations/
-│   ├── hermes/SKILL.md
-│   ├── claude-code/
-│   ├── codex/
-│   └── openclaw/
-├── agent_spark/       ← Python package (zero deps)
-└── app/               ← Streamlit playground (optional)
+AGENTS.md          ← you are here (Claude Code + Codex auto-load)
+├── agent_spark/   ← Python package
+│   ├── spark_ideate.py    ← ⚡ primary entry
+│   ├── generator.py       ← LLM diverge + parse
+│   ├── filter/            ← 5-layer convergence engine
+│   ├── audit/             ← 36-point structured audit
+│   ├── presets/           ← 20 domain presets
+│   ├── locale.py          ← EN/ZH auto-detect
+│   ├── cli.py             ← CLI tool
+│   └── api.py             ← FastAPI (optional)
+└── integrations/  ← Hermes, OpenClaw, Claude Code, Codex
 ```
