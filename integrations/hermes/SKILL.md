@@ -1,88 +1,117 @@
 ---
-description: "Trigger: '给我灵感' / '给我创意' / 'give me ideas' / 'I need inspiration for [domain]'. Runs the full 6-round interview + AI divergence + 5-layer filter + audit pipeline. Bilingual (auto-detects EN/ZH from user input)."
-version: 2.1.0
+description: "Trigger: '给我灵感' / '给我创意' / 'give me ideas' / 'I need inspiration for [domain]'. One-call LLM diverge + 5-layer local filter. Bilingual auto-detect. No rounds, no CLI — just import spark_ideate()."
+version: 3.0.0
 author: Agent Spark
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    related_skills: [spike, plan, humanizer]
+    related_skills: []
+    install: "pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git"
 ---
 
+# Agent Spark — 一次调用，从领域到收敛灵感
+
+用户说「给我 XX 领域的创意」→ 直接调用 `spark_ideate()`，一步到位。
+
+不需要 6 轮问答，不需要 CLI，不需要配置。
+
+## 核心调用（Agent 唯一要调的）
+
+```python
+from agent_spark import spark_ideate
+
+results = spark_ideate(
+    domain="宠物用品",
+    llm=lambda prompt, system, model: your_llm_call(prompt, system),
+)
+
+for r in results:
+    print(f"{r['title']}")
+    print(f"  {r['one_line']}")
+    print(f"  可行性 {r['feasibility_score']}/5  新颖度 {r['novelty_score']}/5")
 ```
-User Interview → Web Pain Mining → AI Divergence (6 dimensions)
-→ 5-Layer Convergence Filter → Audit → Export
+
+**内部三步自动完成：**
+1. 加载 20 领域预置痛点库（`find_domain()` 自动匹配）
+2. 你的大模型根据领域 + 痛点发散 6+ 个创意
+3. 本地五层规则引擎收敛（L1 事实 / L2 逻辑 / L3 落地 / L4 市场 / L5 热词）
+
+## LLM 接入方式
+
+### 方式一：传 callable（推荐，Agent 自带 LLM）
+
+```python
+def my_llm(prompt, system, model):
+    return call_openai(prompt, system=system, model=model)
+
+results = spark_ideate("智能家居安防", llm=my_llm)
 ```
 
-Mine real needs, diverge with AI, converge with rules, audit for quality.
+### 方式二：环境变量（零配置）
 
----
+```bash
+export OPENAI_API_KEY=sk-...
+# 或 export OPENAI_BASE_URL=http://localhost:11434/v1  # Ollama
+```
 
-## Trigger / 触发
+```python
+results = spark_ideate("marine biology equipment")  # 自动 HTTP 调用
+```
 
-| English | 中文 |
-|---------|------|
-| "give me ideas" | "给我灵感" |
-| "creative ideas for [domain]" | "我想在 XX 领域找创意" |
-| "I need inspiration for [domain]" | "帮我挖一下 XX 的痛点" |
-
-On trigger → **immediately ask Round 1** (one question at a time).
-
----
-
-## Pipeline
-
-### Step 0: Language Detection
-Read the user's message. If it contains Chinese characters → `locale="zh"`, else `"en"`.
-Use this locale for ALL subsequent questions and output.
-
-### Step 1: Domain
-Ask one question: "What domain needs ideas?" / "想要哪个领域的创意？"
-
-### Step 1.5: Intent Anchor
-Paraphrase the domain back. Confirm understanding before proceeding.
-If user says "大模型相关github涨星项目" → separate domain (LLM tools) from metric (stars).
-
-### Step 2: Pain Points
-"What frustrates you there?" / "这个领域有哪些不方便的地方？"
-Search the web for real pain points.
-
-### Step 3: Product Flaws
-"What existing products have issues?" / "哪些产品有缺点？"
-
-### Step 4: Style
-"A) Incremental or B) Novel?" / "A) 改良优化 还是 B) 全新独创？"
-
-### Step 5: Niche
-"Any niche needs?" / "有什么小众场景？"
-
-### Step 6: Diverge → Filter
-Use `from agent_spark import Filter, find_domain` to get preset pain points,
-or build your own idea list and run `Filter.run()`.
-
-### Step 7: Audit
-Run `from agent_spark.audit.auditor import audit_project_plan` on winning ideas.
-
----
-
-## One-Shot with Presets
-
-If user says a domain that matches a preset ("pet supplies", "remote work tools", etc.):
+### 方式三：纯离线（无需 LLM）
 
 ```python
 from agent_spark import find_domain, Filter
 d = find_domain("pet supplies")
-results = Filter.run(d.ideas, d.pain_points, d.evidence, locale="zh"/"en")
+results = Filter.run(d.ideas, d.pain_points, d.evidence)
 ```
 
-This skips Rounds 1-5 entirely.
+## 触发词（中英文）
 
----
+| 触发词 | 动作 |
+|--------|------|
+| "给我灵感" / "give me ideas" | 问「哪个领域？」→ 调 `spark_ideate()` |
+| "帮我挖一下 XX 痛点" | 直接调 `find_domain()` + `Filter.run()` |
+| "XX 有什么好点子" | 调 `spark_ideate(domain="...")` |
 
-## CLI Quick Reference
+## 完整 API
+
+| 函数 | 用途 |
+|------|------|
+| `spark_ideate(domain, llm=...)` | ⭐ **主入口** — LLM 发散 + 本地收敛 |
+| `find_domain("宠物用品")` | 查预置痛点库 |
+| `Filter.run(ideas, pain_points, evidence)` | 手动跑过滤 |
+| `list_domains()` | 所有 20 个领域名 |
+
+## 安装
 
 ```bash
-agent-spark-filter      # Filter ideas
-agent-spark-audit       # Audit a plan
-agent-spark-pipeline    # Full interactive pipeline
+pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
+```
+
+## 输出格式
+
+每个结果包含：
+
+```python
+{
+    "title": "创意标题",
+    "one_line": "一句话描述",
+    "target_user": "目标用户",
+    "pain_point_solved": "解决的痛点",
+    "core_value": "核心价值",
+    "feasibility_score": 4,    # 1-5 可行性
+    "novelty_score": 3,         # 1-5 新颖度
+    "tags": ["pet", "litter"],
+    "index": 0,
+    "layers": {                 # 各层过滤结果
+        "1_fact": {"passed": True, "message": "..."},
+        "2_logic": {"passed": True, "message": "..."},
+        "3_feasibility": {"passed": True, "message": "..."},
+        "4_market": {"passed": True, "message": "..."},
+        "5_value": {"passed": True, "message": "..."},
+    },
+    "passed": True,
+}
 ```
