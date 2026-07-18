@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agent-spark"
+name = "offline-idea-spark"
 version = "0.9.0-beta"
 description = "Offline creative idea convergence engine for Hermes/Claude Code/Codex CLI/OpenClaw. Built-in 20-domain pain-point knowledge base + 5-layer local rule filter — no LLM chain required. Dual mode: pure offline / LLM-enhanced."
 readme = "README.md"

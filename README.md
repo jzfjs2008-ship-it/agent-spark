@@ -110,7 +110,14 @@ Your LLM                        Agent Spark
 ## 📦 Install
 
 ```bash
+# From GitHub (zero external Python deps for filter engine)
 pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
+
+# From PyPI (package name is offline-idea-spark)
+pip install offline-idea-spark
+
+# With optional REST API
+pip install "offline-idea-spark[api]"
 ```
 
 Core engine: stdlib only. LLM client uses stdlib `urllib`. Optional REST API adds FastAPI + uvicorn + pydantic.

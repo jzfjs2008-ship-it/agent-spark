@@ -108,8 +108,11 @@ ideas = generate_ideas("marine biology equipment")
 # 从 GitHub 安装（过滤引擎无外部 Python 依赖）
 pip install git+https://github.com/jzfjs2008-ship-it/agent-spark.git
 
+# 从 PyPI 安装（包名为 offline-idea-spark）
+pip install offline-idea-spark
+
 # 安装可选 REST API
-pip install "agent-spark[api] @ git+https://github.com/jzfjs2008-ship-it/agent-spark.git"
+pip install "offline-idea-spark[api]"
 ```
 
 核心过滤引擎：**零第三方 Python 包**。仅使用标准库。LLM 客户端使用标准库 `urllib`。可选 REST API 需额外安装 FastAPI + uvicorn + pydantic。
